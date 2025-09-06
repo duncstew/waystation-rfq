@@ -1,0 +1,2205 @@
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/run.py ===
+# run.py
+from app import init_app
+
+server = init_app()
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/run.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic.ini ===
+# A generic, single database configuration.
+
+[alembic]
+# path to migration scripts.
+# this is typically a path given in POSIX (e.g. forward slashes)
+# format, relative to the token %(here)s which refers to the location of this
+# ini file
+script_location = %(here)s/alembic
+
+# template used to generate migration file names; The default value is %%(rev)s_%%(slug)s
+# Uncomment the line below if you want the files to be prepended with date and time
+# see https://alembic.sqlalchemy.org/en/latest/tutorial.html#editing-the-ini-file
+# for all available tokens
+# file_template = %%(year)d_%%(month).2d_%%(day).2d_%%(hour).2d%%(minute).2d-%%(rev)s_%%(slug)s
+
+# sys.path path, will be prepended to sys.path if present.
+# defaults to the current working directory.  for multiple paths, the path separator
+# is defined by "path_separator" below.
+prepend_sys_path = .
+
+# timezone to use when rendering the date within the migration file
+# as well as the filename.
+# If specified, requires the python>=3.9 or backports.zoneinfo library and tzdata library.
+# Any required deps can installed by adding `alembic[tz]` to the pip requirements
+# string value is passed to ZoneInfo()
+# leave blank for localtime
+# timezone =
+
+# max length of characters to apply to the "slug" field
+# truncate_slug_length = 40
+
+# set to 'true' to run the environment during
+# the 'revision' command, regardless of autogenerate
+# revision_environment = false
+
+# set to 'true' to allow .pyc and .pyo files without
+# a source .py file to be detected as revisions in the
+# versions/ directory
+# sourceless = false
+
+# version location specification; This defaults
+# to <script_location>/versions.  When using multiple version
+# directories, initial revisions must be specified with --version-path.
+# The path separator used here should be the separator specified by "path_separator"
+# below.
+# version_locations = %(here)s/bar:%(here)s/bat:%(here)s/alembic/versions
+
+# path_separator; This indicates what character is used to split lists of file
+# paths, including version_locations and prepend_sys_path within configparser
+# files such as alembic.ini.
+# The default rendered in new alembic.ini files is "os", which uses os.pathsep
+# to provide os-dependent path splitting.
+#
+# Note that in order to support legacy alembic.ini files, this default does NOT
+# take place if path_separator is not present in alembic.ini.  If this
+# option is omitted entirely, fallback logic is as follows:
+#
+# 1. Parsing of the version_locations option falls back to using the legacy
+#    "version_path_separator" key, which if absent then falls back to the legacy
+#    behavior of splitting on spaces and/or commas.
+# 2. Parsing of the prepend_sys_path option falls back to the legacy
+#    behavior of splitting on spaces, commas, or colons.
+#
+# Valid values for path_separator are:
+#
+# path_separator = :
+# path_separator = ;
+# path_separator = space
+# path_separator = newline
+#
+# Use os.pathsep. Default configuration used for new projects.
+path_separator = os
+
+
+# set to 'true' to search source files recursively
+# in each "version_locations" directory
+# new in Alembic version 1.10
+# recursive_version_locations = false
+
+# the output encoding used when revision files
+# are written from script.py.mako
+# output_encoding = utf-8
+
+# database URL.  This is consumed by the user-maintained env.py script only.
+# other means of configuring database URLs may be customized within the env.py
+# file.
+sqlalchemy.url = driver://user:pass@localhost/dbname
+
+
+[post_write_hooks]
+# post_write_hooks defines scripts or Python functions that are run
+# on newly generated revision scripts.  See the documentation for further
+# detail and examples
+
+# format using "black" - use the console_scripts runner, against the "black" entrypoint
+# hooks = black
+# black.type = console_scripts
+# black.entrypoint = black
+# black.options = -l 79 REVISION_SCRIPT_FILENAME
+
+# lint with attempts to fix using "ruff" - use the module runner, against the "ruff" module
+# hooks = ruff
+# ruff.type = module
+# ruff.module = ruff
+# ruff.options = check --fix REVISION_SCRIPT_FILENAME
+
+# Alternatively, use the exec runner to execute a binary found on your PATH
+# hooks = ruff
+# ruff.type = exec
+# ruff.executable = ruff
+# ruff.options = check --fix REVISION_SCRIPT_FILENAME
+
+# Logging configuration.  This is also consumed by the user-maintained
+# env.py script only.
+[loggers]
+keys = root,sqlalchemy,alembic
+
+[handlers]
+keys = console
+
+[formatters]
+keys = generic
+
+[logger_root]
+level = WARNING
+handlers = console
+qualname =
+
+[logger_sqlalchemy]
+level = WARNING
+handlers =
+qualname = sqlalchemy.engine
+
+[logger_alembic]
+level = INFO
+handlers =
+qualname = alembic
+
+[handler_console]
+class = StreamHandler
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
+
+[formatter_generic]
+format = %(levelname)-5.5s [%(name)s] %(message)s
+datefmt = %H:%M:%S
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic.ini ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/pyproject.toml ===
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.16.5",
+    "asyncpg>=0.30.0",
+    "fastapi>=0.116.1",
+    "google-genai>=1.33.0",
+    "greenlet>=3.2.4",
+    "httpx>=0.28.1",
+    "psycopg>=3.2.9",
+    "pydantic[email]>=2.11.7",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.1.0",
+    "pytest-postgresql>=7.0.2",
+    "ruff>=0.12.12",
+    "sqlalchemy>=2.0.43",
+    "uvicorn[standard]>=0.35.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"
+pythonpath = "."
+
+[tool.ruff]
+# Set the target Python version for your project.
+target-version = "py313"
+
+# Exclude common directories and files from linting.
+exclude = [
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist"
+]
+
+line-length = 200
+
+[tool.ruff.lint]
+# Enable a basic but comprehensive set of rules.
+# F: Pyflakes, E: pycodestyle, I: isort.
+select = ["F", "E", "I"]
+
+# Set fixable rules to ALL, so you can run `ruff --fix`.
+fixable = ["ALL"]
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/pyproject.toml ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/extract_quote.py ===
+# extract_quote.py (Updated for debugging)
+
+import os
+import google.generativeai as genai
+from pydantic import BaseModel, Field, ValidationError
+from typing import Optional, List
+from dotenv import load_dotenv
+load_dotenv()
+
+
+# (The QuoteData class remains the same)
+class QuoteData(BaseModel):
+    """Pydantic schema for extracting RFQ data from an email."""
+    product: Optional[str] = Field(description="The name of the quoted product, e.g., 'Almonds'.")
+    price_per_pound: Optional[float] = Field(description="The price per pound in USD. Extract only the number.")
+    country_of_origin: Optional[str] = Field(description="The country where the product was sourced.")
+    certifications: List[str] = Field(default_factory=list, description="A list of any mentioned product certifications.")
+    minimum_order_quantity: Optional[int] = Field(description="The MOQ in pounds. Extract only the number.")
+    supplier_email: Optional[str] = Field(description="The supplier's contact email from the signature.")
+    supplier_phone: Optional[str] = Field(description="The supplier's contact phone number from the signature.")
+
+
+def extract_data_from_email(email_text: str) -> Optional[QuoteData]:
+    """
+    Uses the Gemini API to extract structured data from raw email text.
+    """
+    try:
+        api_key = os.environ.get("GEMINI_API_KEY")
+        if not api_key:
+            print("🚨 Error: GEMINI_API_KEY environment variable not set.")
+            return None
+        genai.configure(api_key=api_key)
+
+        model = genai.GenerativeModel(model_name="gemini-1.5-flash")
+        prompt = "Analyze the following email and extract the relevant quote and supplier information."
+
+        response = model.generate_content(
+            contents=[prompt, email_text],
+            generation_config={
+                "response_mime_type": "application/json",
+                "response_schema": QuoteData
+            }
+        )
+        
+        # This will now raise an error if parsing fails, which we can catch.
+        # The .parsed attribute is a shortcut that can hide errors.
+        return QuoteData.model_validate_json(response.text)
+
+    # --- MODIFIED ERROR HANDLING ---
+    except (ValidationError, AttributeError) as e:
+        print("🚨 Failed to validate or parse the response from the model.")
+        print("\n--- Error Details ---")
+        print(e)
+        # Check if the response object exists before trying to access its attributes
+        if 'response' in locals() and hasattr(response, 'text'):
+            print("\n--- Raw Model Response ---")
+            print(response.text)
+        if 'response' in locals() and hasattr(response, 'prompt_feedback'):
+            print("\n--- Prompt Feedback (Safety Ratings) ---")
+            print(response.prompt_feedback)
+        return None
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
+
+# (The __main__ block remains the same)
+if __name__ == "__main__":
+    raw_email_text = """
+    Dear [Buyer's Name],
+
+    Thank you for reaching out to NutraSource Supply for your almond requirements. We are pleased to provide the requested details as follows:
+
+    Product: Almonds
+
+    - Price per Pound: $3.50 USD
+    - Country of Origin: United States (California)
+    - Certifications: USDA Organic, Non-GMO Project Verified, ISO 22000
+    - Minimum Order Quantity (MOQ): 5,000 pounds
+
+    Best regards,
+    Jane Doe
+    Sales Manager
+    NutraSource Supply
+    Phone: +1 (555) 123-4567
+    Email: janedoe@nutrasource.com
+    Address: 1234 Orchard Lane, Fresno, CA, 93722
+    """
+    extracted_data = extract_data_from_email(raw_email_text)
+
+    if extracted_data:
+        print("✅ Successfully extracted data into Pydantic model:")
+        print(extracted_data.model_dump_json(indent=2))
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/extract_quote.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/seed.py ===
+# /Users/duncan/dev/personal-projects/waystation/backend/seed.py
+import asyncio
+import datetime
+
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.config import config
+
+# It's crucial to import your specific models and the session manager
+from app.models import (
+    RFQ,
+    Certification,
+    Email,
+    Quote,
+    Supplier,
+    quote_certification_association,
+    rfq_certification_association,
+)
+from app.services.database import sessionmanager
+
+# You will need to configure the session manager with your database URL
+sessionmanager.init(config.DB_CONFIG)
+
+
+async def clear_data(db: AsyncSession):
+    """Deletes all data from the tables in the correct order."""
+    # Delete from association tables first
+    await db.execute(quote_certification_association.delete())
+    await db.execute(rfq_certification_association.delete())
+    # Delete from tables with foreign keys
+    await db.execute(Email.__table__.delete())
+    await db.execute(Quote.__table__.delete())
+    # Delete from remaining tables
+    await db.execute(RFQ.__table__.delete())
+    await db.execute(Supplier.__table__.delete())
+    await db.execute(Certification.__table__.delete())
+    await db.commit()
+    print("✅ Cleared all existing data.")
+
+
+async def seed_data():
+    """
+    Populates the database with a complete and logical set of sample data
+    for development and testing purposes.
+    """
+    async with sessionmanager.session() as db:
+        print("Starting to seed database...")
+
+        # 1. Wipe all existing data to ensure a clean slate
+        await clear_data(db)
+
+        # 2. Create Certifications 📜
+        certs_to_create = ["Non-GMO", "Halal", "Allergen Free", "Organic"]
+        cert_models = [Certification(name=cert) for cert in certs_to_create]
+        db.add_all(cert_models)
+        await db.flush()  # Flush to assign IDs
+        certs = {c.name: c for c in cert_models}
+        print(f"🌱 Staged {len(certs)} certifications.")
+
+        # 3. Create Suppliers 🏢
+        supplier1 = Supplier(
+            company_name="Global Ingredients Inc.",
+            contact_name="Jane Doe",
+            contact_email="jane.doe@global-ingredients.com",
+            contact_phone="111-222-3333",
+            hq_address="123 Supply St, Foodville, USA",
+            payment_terms="Net 30",
+        )
+        supplier2 = Supplier(
+            company_name="Farm Fresh Organics",
+            contact_name="John Smith",
+            contact_email="john.smith@farm-fresh.com",
+            contact_phone="444-555-6666",
+            hq_address="456 Farmer Rd, Greenfield, USA",
+            payment_terms="Net 60",
+        )
+        supplier3 = Supplier(
+            company_name="Incomplete Supplies Co.",
+            contact_name="Chris P. Bacon",
+            contact_email="chris.b@incomplete-supplies.com",
+            contact_phone="777-888-9999",
+            hq_address="789 Missing Ave, Nowhere, USA",
+            payment_terms="COD",
+        )
+        db.add_all([supplier1, supplier2, supplier3])
+        print("🌱 Staged 3 suppliers.")
+
+        # 4. Create RFQs (Requests for Quotes) 📝
+        rfq1 = RFQ(
+            item="Soy Protein Isolate",
+            due_date=datetime.datetime(2025, 10, 15, tzinfo=datetime.timezone.utc),
+            amount_required_lbs=50000.0,
+            ship_to_location="Chicago, IL",
+            required_certifications=[certs["Non-GMO"], certs["Halal"]],
+        )
+        rfq2 = RFQ(
+            item="Organic Pea Protein",
+            due_date=datetime.datetime(2025, 11, 1, tzinfo=datetime.timezone.utc),
+            amount_required_lbs=25000.0,
+            ship_to_location="Los Angeles, CA",
+            required_certifications=[certs["Organic"], certs["Allergen Free"]],
+        )
+        rfq3 = RFQ(
+            item="Whey Protein Concentrate",
+            due_date=datetime.datetime(2025, 11, 30, tzinfo=datetime.timezone.utc),
+            amount_required_lbs=10000.0,
+            ship_to_location="Miami, FL",
+            required_certifications=[certs["Non-GMO"], certs["Allergen Free"]],
+        )
+        db.add_all([rfq1, rfq2, rfq3])
+        print("🌱 Staged 3 RFQs.")
+
+        # 5a. Create COMPLETE Quotes in response to RFQs 💰
+        quote1 = Quote(
+            supplier=supplier1,
+            rfq=rfq1,
+            price_per_pound=2.55,
+            country_of_origin="USA",
+            min_order_quantity=5000,
+            certifications=[certs["Non-GMO"]],
+        )
+        quote2 = Quote(
+            supplier=supplier2,
+            rfq=rfq1,
+            price_per_pound=2.48,
+            country_of_origin="Canada",
+            min_order_quantity=10000,
+            certifications=[certs["Non-GMO"], certs["Halal"]],
+        )
+        quote3 = Quote(
+            supplier=supplier2,
+            rfq=rfq2,
+            price_per_pound=4.10,
+            country_of_origin="USA",
+            min_order_quantity=2000,
+            certifications=[certs["Organic"], certs["Allergen Free"]],
+        )
+        db.add_all([quote1, quote2, quote3])
+        print("🌱 Staged 3 complete quotes.")
+
+        # 5b. Create INCOMPLETE Quotes for testing clarification features 🧐
+        quote4_missing_price = Quote(
+            supplier=supplier3,
+            rfq=rfq3,
+            price_per_pound=None,  # MISSING
+            country_of_origin="USA",
+            min_order_quantity=1000,
+            certifications=[certs["Non-GMO"], certs["Allergen Free"]],
+        )
+        quote5_missing_moq_and_cert = Quote(
+            supplier=supplier1,
+            rfq=rfq3,
+            price_per_pound=5.50,
+            country_of_origin="Ireland",
+            min_order_quantity=None,  # MISSING
+            certifications=[certs["Non-GMO"]],  # MISSING Allergen Free
+        )
+        quote6_missing_everything = Quote(
+            supplier=supplier2,
+            rfq=rfq3,
+            price_per_pound=None,  # MISSING
+            country_of_origin=None,  # MISSING
+            min_order_quantity=None,  # MISSING
+            certifications=[],  # MISSING ALL
+        )
+        db.add_all([quote4_missing_price, quote5_missing_moq_and_cert, quote6_missing_everything])
+        print("🌱 Staged 3 incomplete quotes.")
+
+        # 6. Create Email logs for each Quote 📧
+        email1 = Email(
+            raw_text="Hello, here is our quote for Soy Protein...",
+            extracted_data={"price_per_pound": 2.55, "country_of_origin": "USA"},
+            quote=quote1,
+        )
+        email2 = Email(
+            raw_text="Hi there - responding to RFQ for soy isolate...",
+            extracted_data={"price_per_pound": 2.48, "country_of_origin": "Canada"},
+            quote=quote2,
+        )
+        email3 = Email(
+            raw_text="For the Organic Pea Protein, our price is $4.10/lb...",
+            extracted_data={"price_per_pound": 4.10, "country_of_origin": "USA"},
+            quote=quote3,
+        )
+        email4 = Email(
+            raw_text="Re: Whey Protein. Sourced from USA, MOQ 1000lbs. We have Non-GMO and Allergen Free certs.",
+            extracted_data={
+                "country_of_origin": "USA",
+                "min_order_quantity": 1000,
+                "certifications": ["Non-GMO", "Allergen Free"],
+            },
+            quote=quote4_missing_price,
+        )
+        email5 = Email(
+            raw_text="Hello - for the Whey, our price is $5.50 per pound from Ireland. We are Non-GMO certified.",
+            extracted_data={"price_per_pound": 5.50, "country_of_origin": "Ireland", "certifications": ["Non-GMO"]},
+            quote=quote5_missing_moq_and_cert,
+        )
+        email6 = Email(
+            raw_text="Hi, we can supply the Whey Protein Concentrate you requested. Let me know if you need more info.",
+            extracted_data={},  # Extracted nothing of value
+            quote=quote6_missing_everything,
+        )
+        db.add_all([email1, email2, email3, email4, email5, email6])
+        print("🌱 Staged 6 email logs (3 complete, 3 incomplete).")
+
+        # 7. Final Commit 🚀
+        await db.commit()
+        print("\n🎉 Successfully committed all data to the database!")
+
+
+async def main():
+    """
+    Initializes the database connection using the centralized config
+    and runs the seeding process.
+    """
+    sessionmanager.init(config.DB_CONFIG)
+    await seed_data()
+    await sessionmanager.close()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/seed.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/.python-version ===
+3.13
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/.python-version ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/code_context.py ===
+import os
+import subprocess
+from pathlib import Path
+from typing import List
+
+def load_gitignore_patterns(gitignore_path: Path) -> List[str]:
+    if not gitignore_path.exists():
+        return []
+    with gitignore_path.open("r") as f:
+        return [line.strip() for line in f if line.strip() and not line.startswith("#")]
+
+def is_ignored(file_path: Path, patterns: List[str]) -> bool:
+    relative_path = str(file_path.relative_to(Path.cwd()))
+    for pattern in patterns:
+        if file_path.match(pattern) or relative_path.startswith(pattern.rstrip("/")):
+            return True
+    return False
+
+def collect_file_content(file_path: Path, max_lines: int = 500) -> str:
+    with file_path.open("r", encoding="utf-8", errors="ignore") as f:
+        lines = f.readlines()
+    if len(lines) > max_lines:
+        return ""
+    header = f"\n=== START FILE: {file_path} ===\n"
+    footer = f"\n=== END FILE: {file_path} ===\n"
+    return header + "".join(lines) + footer
+
+def main() -> None:
+    base_dir = Path.cwd()
+    output_file = base_dir / "backend_code_context.txt"
+    gitignore_patterns = load_gitignore_patterns(base_dir / ".gitignore")
+
+    always_excluded_dirs = {".git", "__pycache__", ".venv", "node_modules"}
+
+    with output_file.open("w", encoding="utf-8") as out:
+        for root, dirs, files in os.walk(base_dir):
+            dirs[:] = [d for d in dirs if d not in always_excluded_dirs]
+
+            for file in files:
+                file_path = Path(root) / file
+                relative_path = file_path.relative_to(base_dir)
+
+                if file_path.name.lower().startswith("readme"):
+                    continue
+                if is_ignored(file_path, gitignore_patterns):
+                    continue
+                if file_path == output_file or file_path.name == ".gitignore":
+                    continue
+
+                try:
+                    content = collect_file_content(file_path)
+                    if content:
+                        out.write(content)
+                except Exception:
+                    continue
+
+        out.write("\n=== PROJECT FILE TREE ===\n")
+        try:
+            tree_output = subprocess.check_output(["tree"], text=True)
+            out.write(tree_output)
+        except Exception:
+            out.write("Could not generate tree output.\n")
+
+
+if __name__ == "__main__":
+    main()
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/code_context.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/config.py ===
+# app/config.py
+
+import os
+
+
+class Config:
+    """
+    Application configuration class.
+    
+    Reads database connection details from environment variables but provides
+    hardcoded defaults for local development.
+    """
+    
+    # --- Hardcoded Defaults (Wouldn't do this in actual app) ---
+    DB_USER = os.getenv("DB_USER", "postgres")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", "mysecretpassword")
+    DB_HOST = os.getenv("DB_HOST", "localhost")
+    DB_PORT = os.getenv("DB_PORT", "5432")
+    DB_NAME = os.getenv("DB_NAME", "waystation")
+
+    DB_CONFIG = os.getenv(
+        "DB_CONFIG",
+        f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    )
+
+config = Config
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/config.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/models.py ===
+# app/models.py
+
+from __future__ import annotations
+
+import datetime
+from uuid import uuid4
+
+from sqlalchemy import (
+    Column,
+    DateTime,
+    Float,
+    ForeignKey,
+    Integer,
+    Numeric,
+    String,
+    Table,
+    Text,
+    UniqueConstraint,
+    select,
+)
+from sqlalchemy.dialects.postgresql import JSONB  # For storing structured LLM output
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import relationship, selectinload
+
+from app.services.database import Base
+
+
+def generate_uuid():
+    return uuid4().hex
+
+# Association table for RFQ -> Certification (Many-to-Many)
+rfq_certification_association = Table(
+    'rfq_certifications', Base.metadata,
+    Column('rfq_id', String, ForeignKey('rfqs.id'), primary_key=True),
+    Column('certification_id', String, ForeignKey('certifications.id'), primary_key=True)
+)
+
+# Association table for Quote -> Certification (Many-to-Many)
+quote_certification_association = Table(
+    'quote_certifications', Base.metadata,
+    Column('quote_id', String, ForeignKey('quotes.id'), primary_key=True),
+    Column('certification_id', String, ForeignKey('certifications.id'), primary_key=True)
+)
+
+class Certification(Base):
+    __tablename__ = "certifications"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    name = Column(String, nullable=False, unique=True)
+
+    @classmethod
+    async def find_by_names(cls, db: AsyncSession, names: list[str]) -> list[Certification]:
+        """Finds certification records by a list of names."""
+        if not names:
+            return []
+        result = await db.execute(select(cls).where(cls.name.in_(names)))
+        return result.scalars().all()
+
+class Supplier(Base):
+    __tablename__ = "suppliers"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    company_name = Column(String, nullable=False, unique=True)
+    contact_name = Column(String)
+    contact_email = Column(String, nullable=False, unique=True)
+    contact_phone = Column(String)
+    hq_address = Column(String)
+    payment_terms = Column(String)
+    
+    quotes = relationship("Quote", back_populates="supplier")
+
+    @classmethod
+    async def create(cls, db: AsyncSession, **kwargs) -> Supplier:
+        supplier = cls(**kwargs)
+        db.add(supplier)
+        await db.commit()
+        await db.refresh(supplier)
+        return supplier
+
+    @classmethod
+    async def get(cls, db: AsyncSession, id: str) -> Supplier | None:
+        return await db.get(cls, id)
+
+    @classmethod
+    async def get_all(cls, db: AsyncSession) -> list[Supplier]:
+        return (await db.execute(select(cls))).scalars().all()
+    
+    @classmethod
+    async def update(cls, db: AsyncSession, id: str, **kwargs) -> Supplier | None:
+        supplier = await cls.get(db, id)
+        if supplier:
+            for key, value in kwargs.items():
+                setattr(supplier, key, value)
+            await db.commit()
+            await db.refresh(supplier)
+        return supplier
+
+class RFQ(Base):
+    __tablename__ = "rfqs"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    item = Column(String, nullable=False)
+    due_date = Column(DateTime(timezone=True)) 
+    amount_required_lbs = Column(Float)
+    ship_to_location = Column(String)
+    
+    required_certifications = relationship("Certification", secondary=rfq_certification_association)
+
+    quotes = relationship("Quote", back_populates="rfq")
+
+    @classmethod
+    async def create(cls, db: AsyncSession, **kwargs) -> RFQ:
+        rfq = cls(**kwargs)
+        db.add(rfq)
+        await db.commit()
+        await db.refresh(rfq)
+        return rfq
+    
+    @classmethod
+    async def get_all(cls, db: AsyncSession) -> list[RFQ]:
+        query = select(cls).options(selectinload(cls.required_certifications))
+        return (await db.execute(query)).scalars().all()
+
+class Quote(Base):
+    __tablename__ = "quotes"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    date_submitted = Column(DateTime(timezone=True), default=datetime.datetime.now(datetime.UTC))
+    supplier_id = Column(String, ForeignKey("suppliers.id"), nullable=False)
+    price_per_pound = Column(Numeric(10, 2))
+    country_of_origin = Column(String)
+    min_order_quantity = Column(Integer)
+    
+    rfq_id = Column(String, ForeignKey("rfqs.id"), nullable=False)
+
+    certifications = relationship("Certification", secondary=quote_certification_association)
+    
+    supplier = relationship("Supplier", back_populates="quotes")
+    rfq = relationship("RFQ", back_populates="quotes")
+    emails = relationship("Email", back_populates="quote") # Relationship to the Email log
+
+    __table_args__ = (UniqueConstraint('supplier_id', 'rfq_id', name='_supplier_rfq_uc'),)
+    
+    @classmethod
+    async def get_by_rfq_id(cls, db: AsyncSession, rfq_id: str) -> list[Quote]:
+        query = (
+            select(cls)
+            .where(cls.rfq_id == rfq_id)
+            .options(selectinload(cls.supplier), selectinload(cls.certifications))
+        )
+        result = await db.execute(query)
+        return result.scalars().all()
+
+class Email(Base):
+    __tablename__ = "emails"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    raw_text = Column(Text, nullable=False)
+    extracted_data = Column(JSONB)
+    
+    quote_id = Column(String, ForeignKey("quotes.id"), nullable=False)
+    quote = relationship("Quote", back_populates="emails")
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/models.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/__init__.py ===
+# app/__init__.py
+
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.config import config
+from app.services.database import sessionmanager
+
+def init_app(init_db=True):
+    lifespan = None
+
+    if init_db:
+        sessionmanager.init(config.DB_CONFIG)
+
+        @asynccontextmanager
+        async def lifespan(app: FastAPI):
+            yield
+            if sessionmanager._engine is not None:
+                await sessionmanager.close()
+
+    server = FastAPI(title="Waystation RFQ API", lifespan=lifespan)
+    
+    # Add CORS middleware to allow requests from your frontend
+    server.add_middleware(
+        CORSMiddleware,
+        allow_origins=[
+            "http://localhost:3000",
+        ],
+        allow_credentials=True,
+        allow_methods=["*"],  
+        allow_headers=["*"],  
+    )
+    
+    # Import and include all your routers
+    from app.views import quotes, rfqs, suppliers
+
+    server.include_router(suppliers.router, prefix="/api")
+    server.include_router(rfqs.router, prefix="/api")
+    server.include_router(quotes.router, prefix="/api")
+
+    return server
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/__init__.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/views/rfqs.py ===
+# app/views/rfqs.py
+
+import datetime
+from typing import Optional, List
+
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel, ConfigDict, Field
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
+from sqlalchemy import select
+
+# Models and DB session
+from app.models import (
+    Certification as CertificationModel,
+    Quote as QuoteModel,
+    RFQ as RFQModel,
+)
+from app.services.database import get_db
+
+# Import the services for LLM extraction and business logic processing
+from app.services.llm_client import extract_quote_data_from_email
+from app.services.quote_processor import process_quote_from_email_data
+
+router = APIRouter(prefix="/rfqs", tags=["RFQs"])
+
+# --- Pydantic Schemas ---
+class CertificationSchema(BaseModel):
+    id: str
+    name: str
+    model_config = ConfigDict(from_attributes=True)
+
+class RFQSchemaBase(BaseModel):
+    item: str
+    due_date: Optional[datetime.datetime] = None
+    amount_required_lbs: Optional[float] = None
+    ship_to_location: Optional[str] = None
+
+class RFQSchemaCreate(RFQSchemaBase):
+    required_certifications: list[str] = []
+
+class RFQSchema(RFQSchemaBase):
+    id: str
+    required_certifications: list[CertificationSchema] = []
+    model_config = ConfigDict(from_attributes=True)
+
+class SupplierComparisonSchema(BaseModel):
+    company_name: str
+    contact_name: Optional[str] = None
+    hq_address: Optional[str] = None
+    payment_terms: Optional[str] = None
+    model_config = ConfigDict(from_attributes=True)
+
+
+class QuoteComparisonSchema(BaseModel):
+    id: str
+    date_submitted: datetime.datetime
+    price_per_pound: Optional[float] = None
+    country_of_origin: Optional[str] = None
+    min_order_quantity: Optional[int] = None
+    certifications: list[CertificationSchema] = []
+    supplier: SupplierComparisonSchema  # Nest the detailed supplier schema
+
+    model_config = ConfigDict(from_attributes=True)
+
+class EmailExtractRequest(BaseModel):
+    """Schema for the incoming request body."""
+    raw_text: str = Field(..., description="The raw text content of the supplier's email.")
+
+class RFQEmailResponse(BaseModel):
+    """Schema for the successful response, returning the new/updated quote."""
+    id: str
+    supplier_id: str
+    rfq_id: str
+    price_per_pound: Optional[float] = None
+    country_of_origin: Optional[str] = None
+    min_order_quantity: Optional[int] = None
+    certifications: list[CertificationSchema] = []
+    model_config = ConfigDict(from_attributes=True)
+
+
+# --- Standard CRUD Endpoints ---
+
+@router.post("", response_model=RFQSchema, status_code=201)
+async def create_rfq(rfq_in: RFQSchemaCreate, db: AsyncSession = Depends(get_db)):
+    """Create a new RFQ."""
+    rfq_data = rfq_in.model_dump(exclude={"required_certifications"})
+
+    # ... (certification handling logic is unchanged)
+    final_certs = []
+    if rfq_in.required_certifications:
+        existing_certs = await CertificationModel.find_by_names(db, rfq_in.required_certifications)
+        existing_cert_names = {c.name for c in existing_certs}
+        final_certs.extend(existing_certs)
+        new_cert_names = set(rfq_in.required_certifications) - existing_cert_names
+        for name in new_cert_names:
+            new_cert = CertificationModel(name=name)
+            db.add(new_cert)
+            final_certs.append(new_cert)
+    
+    new_rfq = RFQModel(**rfq_data)
+    new_rfq.required_certifications = final_certs
+    
+    db.add(new_rfq)
+    await db.commit()
+    await db.refresh(new_rfq) 
+
+    query = (
+        select(RFQModel)
+        .options(selectinload(RFQModel.required_certifications))
+        .where(RFQModel.id == new_rfq.id)
+    )
+    result = await db.execute(query)
+    rfq_with_relationships = result.scalars().first()
+
+    return RFQSchema.model_validate(rfq_with_relationships)
+
+@router.get("", response_model=list[RFQSchema])
+async def get_rfqs(db: AsyncSession = Depends(get_db)):
+    """Retrieve all RFQs."""
+    return await RFQModel.get_all(db)
+
+@router.get("/{rfq_id}/quotes", response_model=list[QuoteComparisonSchema])
+async def get_quotes_for_rfq(rfq_id: str, db: AsyncSession = Depends(get_db)):
+    """Retrieve all quotes submitted for a specific RFQ."""
+    rfq = await db.get(RFQModel, rfq_id)
+    if not rfq:
+        raise HTTPException(status_code=404, detail="RFQ not found")
+    return await QuoteModel.get_by_rfq_id(db, rfq_id=rfq_id)
+
+# --- Optimized LLM-driven Endpoint ---
+@router.post("/{rfq_id}/extract-quote-from-email", response_model=RFQEmailResponse)
+async def extract_and_save_quote(
+    rfq_id: str,
+    request: EmailExtractRequest,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Extracts quote data from an email, processes it, and persists it to the database.
+    This endpoint coordinates calls to the LLM service and the data processing service.
+    """
+    # 1. Verify RFQ exists
+    rfq = await db.get(RFQModel, rfq_id)
+    if not rfq:
+        raise HTTPException(status_code=404, detail="RFQ not found")
+
+    # 2. Call the LLM service to get structured data
+    extracted_data = await extract_quote_data_from_email(request.raw_text)
+    
+    # 3. Call the business logic service to handle the database transaction
+    try:
+        quote = await process_quote_from_email_data(
+            db=db,
+            rfq_id=rfq.id,
+            rfq_item_name=rfq.item,
+            extracted_data=extracted_data,
+            raw_text=request.raw_text
+        )
+        
+        await db.commit()
+
+        await db.refresh(quote, ["supplier", "certifications"])
+        
+        response_data = RFQEmailResponse.model_validate(quote)
+        return response_data
+        
+    except ValueError as e:
+        await db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        await db.rollback()
+        # Log the full error for debugging on the server
+        print(f"An unexpected database transaction error occurred: {e}")
+        raise HTTPException(status_code=500, detail="An internal error occurred while saving the quote.")
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/views/rfqs.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/views/suppliers.py ===
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel, ConfigDict, EmailStr
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.models import Supplier as SupplierModel
+from app.services.database import get_db
+
+router = APIRouter(prefix="/suppliers", tags=["Suppliers"])
+
+# Pydantic Schemas for data validation and serialization
+class SupplierSchemaBase(BaseModel):
+    company_name: str
+    contact_name: str | None = None
+    contact_email: EmailStr
+    contact_phone: str | None = None
+    hq_address: str | None = None
+    payment_terms: str | None = None
+
+class SupplierSchemaCreate(SupplierSchemaBase):
+    pass
+
+class SupplierSchemaUpdate(SupplierSchemaBase):
+    company_name: str | None = None
+    contact_email: EmailStr | None = None
+
+class SupplierSchema(SupplierSchemaBase):
+    id: str
+    model_config = ConfigDict(from_attributes=True)
+
+@router.post("", response_model=SupplierSchema, status_code=201)
+async def create_supplier(supplier_in: SupplierSchemaCreate, db: AsyncSession = Depends(get_db)):
+    """Create a new supplier."""
+    supplier = await SupplierModel.create(db, **supplier_in.model_dump())
+    return supplier
+
+@router.get("", response_model=list[SupplierSchema])
+async def get_suppliers(db: AsyncSession = Depends(get_db)):
+    """Retrieve a list of all suppliers."""
+    return await SupplierModel.get_all(db)
+
+@router.put("/{supplier_id}", response_model=SupplierSchema)
+async def update_supplier(supplier_id: str, supplier_in: SupplierSchemaUpdate, db: AsyncSession = Depends(get_db)):
+    """Update an existing supplier."""
+    update_data = supplier_in.model_dump(exclude_unset=True)
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No update data provided")
+        
+    supplier = await SupplierModel.update(db, id=supplier_id, **update_data)
+    if not supplier:
+        raise HTTPException(status_code=404, detail="Supplier not found")
+    return supplier
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/views/suppliers.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/views/quotes.py ===
+# /Users/duncan/dev/personal-projects/waystation/backend/app/views/quotes.py
+import datetime
+from typing import Optional
+
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel, ConfigDict
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
+
+from app.models import Quote as QuoteModel
+from app.models import RFQ as RFQModel
+from app.services.database import get_db
+from app.services.llm_client import generate_clarification_email
+from app.views.rfqs import CertificationSchema, SupplierComparisonSchema
+
+router = APIRouter(prefix="/quotes", tags=["Quotes"])
+
+
+class RFQInfoSchema(BaseModel):
+    """Minimal RFQ information to nest inside a quote response."""
+
+    id: str
+    item: str
+    model_config = ConfigDict(from_attributes=True)
+
+
+class QuoteWithDetailsSchema(BaseModel):
+    """Schema for returning a quote with all its related details."""
+
+    id: str
+    date_submitted: datetime.datetime
+    price_per_pound: Optional[float] = None
+    country_of_origin: Optional[str] = None
+    min_order_quantity: Optional[int] = None
+    certifications: list[CertificationSchema] = []
+    supplier: SupplierComparisonSchema
+    rfq: RFQInfoSchema
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ClarificationEmailResponse(BaseModel):
+    """Schema for the clarification email response."""
+
+    email_text: str
+
+
+@router.get("", response_model=list[QuoteWithDetailsSchema])
+async def get_all_quotes(db: AsyncSession = Depends(get_db)):
+    """
+    Retrieve a list of all quotes, including their associated supplier,
+    certifications, and RFQ details, for a master list view.
+    """
+    query = (
+        select(QuoteModel)
+        .options(
+            selectinload(QuoteModel.supplier),
+            selectinload(QuoteModel.certifications),
+            selectinload(QuoteModel.rfq),
+        )
+        .order_by(QuoteModel.date_submitted.desc())
+    )
+    result = await db.execute(query)
+    quotes = result.scalars().all()
+    return quotes
+
+
+@router.post("/{quote_id}/generate-clarification-email", response_model=ClarificationEmailResponse)
+async def generate_quote_clarification_email(quote_id: str, db: AsyncSession = Depends(get_db)):
+    """
+    Generates an email to a supplier requesting missing information
+    by comparing the Quote against its RFQ.
+    """
+    query = (
+        select(QuoteModel)
+        .where(QuoteModel.id == quote_id)
+        .options(
+            selectinload(QuoteModel.supplier),
+            selectinload(QuoteModel.certifications),
+            selectinload(QuoteModel.rfq).selectinload(RFQModel.required_certifications),
+        )
+    )
+    result = await db.execute(query)
+    quote = result.scalar_one_or_none()
+
+    if not quote:
+        raise HTTPException(status_code=404, detail="Quote not found")
+
+    missing_items = []
+
+    # Check for missing fields on the quote
+    if quote.price_per_pound is None:
+        missing_items.append("Price per pound")
+    if quote.country_of_origin is None:
+        missing_items.append("Country of origin")
+    if quote.min_order_quantity is None:
+        missing_items.append("Minimum order quantity")
+
+    # Compare certifications
+    quote_cert_names = {cert.name for cert in quote.certifications}
+    required_cert_names = {cert.name for cert in quote.rfq.required_certifications}
+
+    missing_certs = required_cert_names - quote_cert_names
+    for cert_name in sorted(list(missing_certs)):
+        missing_items.append(f"Missing Certification: {cert_name}")
+
+    if not missing_items:
+        raise HTTPException(status_code=400, detail="No missing information found to request.")
+
+    # Construct the prompt for the LLM
+    prompt = f"""
+    You are a polite and professional procurement assistant. Your task is to draft an email to a supplier to request missing information from their recent quote.
+
+    **Context:**
+    - We sent out a Request for Quote (RFQ) for the item: "{quote.rfq.item}".
+    - The supplier, {quote.supplier.company_name}, has responded with a partial quote.
+    - We need to contact: {quote.supplier.contact_name or 'the sales team'}.
+
+    **Task:**
+    Write a concise and friendly email requesting the following missing information:
+    - {', '.join(missing_items)}
+
+    The email should be addressed to {quote.supplier.contact_name or 'the team at ' + quote.supplier.company_name} and should be ready to send. Keep it brief and to the point. Start the email with a greeting and end with a professional closing. Do not include a subject line.
+    """
+
+    # Call the LLM service
+    try:
+        generated_email = await generate_clarification_email(prompt)
+        return ClarificationEmailResponse(email_text=generated_email)
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to generate email: {str(e)}")
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/views/quotes.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/services/database.py ===
+# app/services/database.py
+import contextlib
+from typing import AsyncIterator
+
+from sqlalchemy.ext.asyncio import (
+    AsyncConnection,
+    AsyncEngine,
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
+
+class DatabaseSessionManager:
+    def __init__(self):
+        self._engine: AsyncEngine | None = None
+        self._sessionmaker: async_sessionmaker | None = None
+
+    def init(self, host: str):
+        self._engine = create_async_engine(host)
+        self._sessionmaker = async_sessionmaker(autocommit=False, bind=self._engine)
+
+    async def close(self):
+        if self._engine is None:
+            raise Exception("DatabaseSessionManager is not initialized")
+        await self._engine.dispose()
+        self._engine = None
+        self._sessionmaker = None
+
+    @contextlib.asynccontextmanager
+    async def connect(self) -> AsyncIterator[AsyncConnection]:
+        if self._engine is None:
+            raise Exception("DatabaseSessionManager is not initialized")
+
+        async with self._engine.begin() as connection:
+            try:
+                yield connection
+            except Exception:
+                await connection.rollback()
+                raise
+
+    @contextlib.asynccontextmanager
+    async def session(self) -> AsyncIterator[AsyncSession]:
+        if self._sessionmaker is None:
+            raise Exception("DatabaseSessionManager is not initialized")
+
+        session = self._sessionmaker()
+        try:
+            yield session
+        except Exception:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()
+
+    # Used for testing
+    async def create_all(self, connection: AsyncConnection):
+        await connection.run_sync(Base.metadata.create_all)
+
+    async def drop_all(self, connection: AsyncConnection):
+        await connection.run_sync(Base.metadata.drop_all)
+
+sessionmanager = DatabaseSessionManager()
+
+async def get_db() -> AsyncIterator[AsyncSession]:
+    async with sessionmanager.session() as session:
+        yield session
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/services/database.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/services/llm_client.py ===
+# app/services/llm_client.py
+
+import os
+from typing import Any, Dict, List, Optional
+
+import google.generativeai as genai
+from fastapi import HTTPException
+from google.generativeai import GenerativeModel
+from pydantic import BaseModel, Field, ValidationError
+
+# --- OPTIMIZED PATTERN: Initialize model once on application startup ---
+gemini_model: Optional[GenerativeModel] = None
+
+try:
+    api_key = "AIzaSyCNYItHUNeVtnbAo5OT1ibvte8JcU8siD4"
+    if not api_key:
+        raise ValueError("GEMINI_API_KEY environment variable not found.")
+
+    genai.configure(api_key=api_key)
+
+    gemini_model = genai.GenerativeModel("models/gemini-1.5-flash")
+    print("✅ Google GenAI Client initialized successfully.")
+
+except (ValueError, ImportError) as e:
+    # This will be printed on startup if the configuration fails.
+    print(f"⚠️ Warning: Google GenAI Client could not be initialized. Error: {e}")
+
+
+class ExtractedDataSchema(BaseModel):
+    """Pydantic schema to enforce structured output from the Gemini LLM."""
+
+    product: Optional[str] = Field(description="The name of the quoted product, e.g., 'Almonds'.")
+    price_per_pound: Optional[float] = Field(description="The price per pound in USD. Extract only the numerical value.")
+    country_of_origin: Optional[str] = Field(description="The country where the product was sourced.")
+    certifications: List[str] = Field(default_factory=list, description="A list of any mentioned product certifications.")
+    minimum_order_quantity: Optional[int] = Field(description="The MOQ in pounds. Extract only the numerical value.")
+
+    company_name: Optional[str] = Field(description="The supplier's company name from the signature.")
+    contact_name: Optional[str] = Field(description="The supplier's contact person name from the signature.")
+
+    supplier_email: Optional[str] = Field(description="The supplier's contact email, typically from the email signature.")
+    supplier_phone: Optional[str] = Field(description="The supplier's contact phone number, typically from the email signature.")
+
+
+async def extract_quote_data_from_email(email_text: str) -> ExtractedDataSchema:
+    """
+    Uses Gemini to extract structured data from raw email text into a Pydantic model.
+    """
+    if not gemini_model:
+        # This will be triggered if the model failed to initialize on startup
+        raise HTTPException(status_code=503, detail="Gemini client is not available. Check server logs for initialization errors.")
+
+    # --- SIMPLIFIED PROMPT: More effective and less token-heavy ---
+    prompt = "Analyze the following email and extract the relevant quote and supplier information."
+
+    try:
+        generation_config: Dict[str, Any] = {
+            "response_mime_type": "application/json",
+            "response_schema": ExtractedDataSchema,
+        }
+
+        response = await gemini_model.generate_content_async(contents=[prompt, email_text], generation_config=generation_config)
+
+        parsed_data = ExtractedDataSchema.model_validate_json(response.text)
+        return parsed_data
+
+    except (ValidationError, AttributeError) as e:
+        # This block catches errors if the LLM's JSON doesn't match the Pydantic schema.
+        print(f"--- LLM Validation Error --- \n{e}")
+        print(f"--- Raw LLM Response --- \n{response.text if 'response' in locals() else 'No response object'}")
+        raise HTTPException(
+            status_code=502,  # Bad Gateway: The upstream LLM service returned an invalid response
+            detail="The LLM response could not be validated. Check server logs for the raw response.",
+        )
+    except Exception as e:
+        # This catches other potential errors (e.g., network issues, API key problems).
+        print(f"An unexpected error occurred with the Gemini API: {e}")
+        raise HTTPException(status_code=502, detail=f"An error occurred with the LLM service: {str(e)}")
+
+
+async def generate_clarification_email(prompt: str) -> str:
+    """
+    Uses Gemini to generate a text-based response from a detailed prompt.
+    """
+    if not gemini_model:
+        raise HTTPException(status_code=503, detail="Gemini client is not available. Check server logs for initialization errors.")
+
+    try:
+        response = await gemini_model.generate_content_async(contents=[prompt])
+        return response.text
+    except Exception as e:
+        # This catches other potential errors (e.g., network issues, API key problems).
+        print(f"An unexpected error occurred with the Gemini API: {e}")
+        raise HTTPException(status_code=502, detail=f"An error occurred with the LLM service: {str(e)}")
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/services/llm_client.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/services/quote_processor.py ===
+# app/services/quote_processor.py
+
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from fastapi import HTTPException
+
+# Import your data schemas and database models
+from app.services.llm_client import ExtractedDataSchema
+from app.models import (
+    Supplier as SupplierModel,
+    Certification as CertificationModel,
+    Quote as QuoteModel,
+    Email as EmailModel,
+    RFQ as RFQModel
+)
+
+async def process_quote_from_email_data(
+    db: AsyncSession,
+    rfq_id: str,
+    rfq_item_name: str,
+    extracted_data: ExtractedDataSchema,
+    raw_text: str
+) -> QuoteModel:
+    """
+    Handles the business logic of finding/creating records based on LLM output.
+    This function contains all the database logic that was previously in the view.
+    """
+    try:
+        # A. Handle Supplier: Find or Create
+        supplier = None
+        if extracted_data.supplier_email:
+            supplier_result = await db.execute(
+                select(SupplierModel).where(SupplierModel.contact_email == extracted_data.supplier_email)
+            )
+            supplier = supplier_result.scalar_one_or_none()
+        
+        if not supplier and extracted_data.supplier_email:
+            # Use the extracted company name, or create a UNIQUE placeholder as a fallback.
+            company_name_to_use = extracted_data.company_name or f"Supplier ({extracted_data.supplier_email})"
+            
+            supplier = SupplierModel(
+                company_name=company_name_to_use,
+                contact_name=extracted_data.contact_name,
+                contact_email=extracted_data.supplier_email,
+                contact_phone=extracted_data.supplier_phone
+            )
+            db.add(supplier)
+            await db.flush()  # Ensures supplier.id is available for the quote
+        
+        if not supplier:
+            # The service layer should raise exceptions that the view layer can catch.
+            raise ValueError("Could not identify a supplier email in the text.")
+
+        # B. Handle Certifications: Find or Create
+        quote_certs = []
+        if extracted_data.certifications:
+            existing_certs = await CertificationModel.find_by_names(db, extracted_data.certifications)
+            cert_map = {cert.name: cert for cert in existing_certs}
+            
+            for cert_name in extracted_data.certifications:
+                if cert_name not in cert_map:
+                    new_cert = CertificationModel(name=cert_name)
+                    db.add(new_cert)
+                    quote_certs.append(new_cert)
+                else:
+                    quote_certs.append(cert_map[cert_name])
+
+        # C. Handle Quote: Find and Update, or Create
+        quote_result = await db.execute(
+            select(QuoteModel).where(QuoteModel.rfq_id == rfq_id, QuoteModel.supplier_id == supplier.id)
+        )
+        quote = quote_result.scalar_one_or_none()
+        
+        quote_data_dict = {
+            "price_per_pound": extracted_data.price_per_pound,
+            "country_of_origin": extracted_data.country_of_origin,
+            "min_order_quantity": extracted_data.minimum_order_quantity,
+        }
+
+        if quote:  # Update existing quote
+            for key, value in quote_data_dict.items():
+                if value is not None:
+                    setattr(quote, key, value)
+            quote.certifications = quote_certs
+        else:  # Create new quote
+            quote = QuoteModel(
+                rfq_id=rfq_id,
+                supplier_id=supplier.id,
+                certifications=quote_certs,
+                **quote_data_dict
+            )
+            db.add(quote)
+            # Flush the session to get the new quote's ID from the DB
+            await db.flush()
+
+        # D. Log the raw email and link it to the quote
+        email_log = EmailModel(
+            raw_text=raw_text,
+            quote=quote,
+            extracted_data=extracted_data.model_dump()
+        )
+        db.add(email_log)
+
+        # The commit will be handled by the endpoint context to ensure atomicity
+        return quote
+
+    except Exception as e:
+        # Re-raise exceptions to be handled by the endpoint's try/except block
+        raise e
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/app/services/quote_processor.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/tests/integration/conftest.py ===
+import pytest
+from httpx import ASGITransport, AsyncClient
+from pytest_postgresql import factories
+from pytest_postgresql.janitor import DatabaseJanitor
+
+from app import (
+    init_app,
+    models,  # noqa: F401
+)
+from app.services.database import get_db, sessionmanager
+
+test_db = factories.postgresql_proc(port=None, dbname="test_db")
+
+
+@pytest.fixture(scope="session", autouse=True)
+async def connection_test(test_db):
+    """
+    Creates the database connection and session manager once per test session.
+    This async fixture will now correctly use the session-scoped event loop.
+    """
+    pg_host = test_db.host
+    pg_port = test_db.port
+    pg_user = test_db.user
+    pg_db = test_db.dbname
+    pg_password = test_db.password
+
+    with DatabaseJanitor(
+        user=pg_user, host=pg_host, port=pg_port, dbname=pg_db,
+        version=test_db.version, password=pg_password,
+    ):
+        connection_str = f"postgresql+asyncpg://{pg_user}:{pg_password}@{pg_host}:{pg_port}/{pg_db}"
+        sessionmanager.init(connection_str)
+        yield
+        await sessionmanager.close()
+
+
+@pytest.fixture(scope="function", autouse=True)
+async def create_tables(connection_test):
+    """
+    Creates and drops tables for each test function, ensuring a clean state.
+    """
+    async with sessionmanager.connect() as connection:
+        await sessionmanager.drop_all(connection)
+        await sessionmanager.create_all(connection)
+
+
+@pytest.fixture(scope="function")
+def app(create_tables):
+    _app = init_app(init_db=False)
+    yield _app
+
+
+@pytest.fixture(scope="function")
+async def client(app):
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+        yield client
+
+
+@pytest.fixture(scope="function", autouse=True)
+def session_override(app):
+    async def get_db_override():
+        async with sessionmanager.session() as session:
+            yield session
+
+    app.dependency_overrides[get_db] = get_db_override
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/tests/integration/conftest.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/tests/integration/test_validation.py ===
+import pytest
+from httpx import AsyncClient
+
+# Import models and session manager for test setup
+from app.models import Quote
+from app.services.database import sessionmanager
+
+# Mark the test file as requiring the asyncio test runner
+pytestmark = pytest.mark.asyncio
+
+
+async def test_create_supplier_invalid_email(client: AsyncClient):
+    """
+    Checks that creating a supplier with an invalid email fails with a 422 Unprocessable Entity error.
+    This tests Pydantic's built-in EmailStr validation.
+    """
+    response = await client.post("/api/suppliers", json={
+        "company_name": "Invalid Email Corp",
+        "contact_name": "Jane Doe",
+        "contact_email": "not-a-valid-email",  # Invalid email format
+        "contact_phone": "555-1234"
+    })
+
+    assert response.status_code == 422
+    # Pydantic provides detailed error messages
+    error_detail = response.json()["detail"][0]
+    assert error_detail["type"] == "value_error"
+    assert "valid email address" in error_detail["msg"]
+    assert error_detail["loc"] == ["body", "contact_email"]
+
+
+async def test_create_supplier_missing_required_field(client: AsyncClient):
+    """
+    Checks that creating a supplier without a required field (e.g., company_name)
+    fails with a 422 Unprocessable Entity error.
+    """
+    response = await client.post("/api/suppliers", json={
+        # "company_name" is missing
+        "contact_name": "John Smith",
+        "contact_email": "john.smith@example.com",
+    })
+
+    assert response.status_code == 422
+    error_detail = response.json()["detail"][0]
+    assert error_detail["type"] == "missing"
+    assert error_detail["msg"] == "Field required"
+    assert error_detail["loc"] == ["body", "company_name"]
+
+
+async def test_submit_email_for_quote_with_negative_price(client: AsyncClient):
+    """
+    Checks that submitting email data for a quote with a negative price fails with a 422 error.
+    This tests the custom validation (Field(gt=0)) added to the Pydantic schema.
+    """
+    # --- Setup: Create prerequisite data ---
+    # 1. Create a supplier
+    supplier_res = await client.post("/api/suppliers", json={
+        "company_name": "Test Supplier Inc.",
+        "contact_email": "contact@testsupplier.com"
+    })
+    assert supplier_res.status_code == 201
+    supplier_id = supplier_res.json()["id"]
+
+    # 2. Create an RFQ
+    rfq_res = await client.post("/api/rfqs", json={
+        "item": "Organic Arabica Beans",
+        "amount_required_lbs": 1000.0
+    })
+    assert rfq_res.status_code == 201
+    rfq_id = rfq_res.json()["id"]
+
+    # 3. Create a quote shell directly in the database, as there is no public endpoint for it.
+    # This is a common pattern in integration tests to set up specific states.
+    async with sessionmanager.session() as session:
+        new_quote = Quote(supplier_id=supplier_id, rfq_id=rfq_id)
+        session.add(new_quote)
+        await session.commit()
+        await session.refresh(new_quote)
+        quote_id = new_quote.id
+
+    # --- Test: Attempt to submit data with a negative price ---
+    response = await client.post(
+        f"/api/quotes/{quote_id}/submit-email",
+        json={
+            "raw_text": "Hello, here is our quote.",
+            "quote_data": {
+                "price_per_pound": -5.99,  # Invalid (negative) price
+                "country_of_origin": "Ethiopia",
+                "min_order_quantity": 50
+            }
+        }
+    )
+
+    assert response.status_code == 422
+    error_detail = response.json()["detail"][0]
+    assert error_detail["type"] == "greater_than"
+    assert "Input should be greater than 0" in error_detail["msg"]
+    # Check that the error location points to the exact invalid field
+    assert error_detail["loc"] == ["body", "quote_data", "price_per_pound"]
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/tests/integration/test_validation.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/tests/integration/test_api.py ===
+import pytest
+from httpx import AsyncClient
+
+# Mark the test file as requiring the asyncio test runner
+pytestmark = pytest.mark.asyncio
+
+
+async def test_get_suppliers_on_clean_db(client: AsyncClient):
+    """
+    Checks that the GET /api/suppliers endpoint returns an empty list.
+    """
+    response = await client.get("/api/suppliers")
+
+    assert response.status_code == 200
+    assert response.json() == []
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/tests/integration/test_api.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/sample-data.md ===
+
+
+{
+  "raw_text": "Subject: Quote for Soy Protein Isolate RFQ\n\nHello,\n\nWe are pleased to submit our offer for the Soy Protein Isolate. Please see the details below:\n\n- Product: Soy Protein Isolate\n- Price per Pound: $2.58\n- Minimum Order Quantity: 15,000 lbs\n- Country of Origin: Argentina\n- Certifications: Halal, Allergen Free\n\nWe look forward to hearing from you.\n\nBest,\n\nSarah Jenkins\nBulk AgriFoods\nsarah.j@bulkagrifoods.com\n(312) 555-0101"
+}
+
+{
+  "raw_text": "Subject: Your Soy Protein Isolate Inquiry\n\nHi Team,\n\nHere is our pricing for the Soy Protein Isolate you requested. Our product is sourced domestically.\n\n- Price: $2.65 per pound\n- MOQ: 5000 lbs\n- Origin: United States\n- Available Certifications: Non-GMO, Organic\n\nLet us know if you have any questions.\n\nThanks,\n\nMichael Lee\nSales Department\nPureSource Ingredients\nm.lee@puresource.net\n(213) 555-0102"
+}
+
+{
+  "raw_text": "Subject: Response to RFQ - Soy Protein\n\nGood morning,\n\nWe can offer the Soy Protein Isolate from Canada at a price of $2.55/lb. Our minimum order quantity is one full truckload, which is 22,000 pounds. This product is fully certified as Non-GMO.\n\nPlease feel free to reach out with any further questions.\n\nSincerely,\n\nEmily Garcia\nContinental Commodities\nemily.g@conticommodity.com\n(416) 555-0103"
+}
+
+{
+  "raw_text": "Subject: Snowball Pricing for Q4\n\nHello Team,\n\nWe appreciate you reaching out regarding your snowball inquiry. We can offer our classic snowballs for $0.50 each. Our minimum order quantity for this item is 10,000 units. The snowballs are produced locally using purified water from our spring-fed lake and are suitable for all ages.\n\nLet me know if you need any further information.\n\nBest,\n\nMark Davis\nWinter Wonderland Provisions\nmark.d@winterwonderland.net\n(773) 555-0104"
+}
+
+
+Create Suppliers
+
+[
+  {
+    "company_name": "Globex Corp.",
+    "contact_name": "Homer Simpson",
+    "contact_email": "homer@globex.com",
+    "contact_phone": "555-123-4567",
+    "hq_address": "123 Globex Drive, Shelbyville, USA",
+    "payment_terms": "Net 30"
+  },
+  {
+    "company_name": "Acme Industries",
+    "contact_name": "Wile E. Coyote",
+    "contact_email": "coyote@acme.com",
+    "contact_phone": "555-987-6543",
+    "hq_address": "456 Coyote Canyon, Desert, USA",
+    "payment_terms": "Net 60"
+  }
+]
+
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/sample-data.md ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/assumptions.md ===
+## Assumptions
+
+### Demo
+1. Small-Scale Data. The solution assumes the volume of emails and RFQ data is small enough to be handled by a single, synchronous processing flow without overwhelming the server.
+2. Synchronous Processing. The LLM calls and database updates are executed sequentially within the API request. This assumes that these operations will complete quickly enough to prevent user-facing timeouts. A production-ready system would use an asynchronous, event-driven approach.
+3. Supplier Identification. The system assumes a supplier can be uniquely identified by their email address. If an email is submitted from an address not yet in the database, a new supplier is created.
+4. One-to-One Quote-to-RFQ. The business logic assumes each supplier will submit exactly one quote per RFQ. This is explicitly stated in the prompt, and the database schema's unique constraint (_supplier_rfq_uc) enforces this.
+Plain Text Emails. The application is built to process only plain text email content, ignoring any potential HTML formatting or attachments.
+5. Security & Scalability Trade-off: The demo application prioritizes a simple, synchronous architecture for clarity. We assume that in a production environment, this would be replaced by a secure, asynchronous, event-driven system to handle scale and protect sensitive customer data through measures like data isolation and infrastructure hardening.
+
+### Waystation
+Waystation General Assumptions
+1. Workflow Assumptions
+    1. Users want to automate the tedious, manual process of data entry from quote emails, and that an LLM (OCR api), etc is a technically feasible and reliable way to accomplish this.
+2. Cost-Effectiveness
+	1. The cost of using an LLM API for every email is low enough to be profitable or sustainable within the products pricing model.
+3. Feasibility Assumptions
+	1. One of the more critical assumptions is that the progress and current state of LLMs is capable of consistently and accurately extracting structured data from a variety of email formats. It is probably a certainty that there are extremely varied email formats from different suppliers. Aka going to assumed that the emails and structure of emails or whatever communication is not standardized.
+5. Supplier Workflow Inflexible. CPG suppliers don't want to onboard to procurement platforms -> Marketplace not a fit
+6. Network Effects will create defensible product -> I have a q regarding this.
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/assumptions.md ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/alembic-readme.md ===
+# Alembic & PostgreSQL Quickstart
+
+This document outlines the essential workflows for using Alembic to manage your database schema with a local PostgreSQL instance running in Docker.
+
+### Standard Workflow: Making Changes
+
+Follow these steps when you modify your `models.py` file to apply the changes to your database.
+
+1.  **Edit your models:** Add, modify, or remove columns in your `models.py` file.
+
+2.  **Generate a migration:** Use the `revision` command to create a new migration script based on your changes.
+
+    ```bash
+    alembic revision --autogenerate -m "Your descriptive message here"
+    ```
+
+3.  **Apply the migration:** Run `upgrade` to apply the pending migration to the database.
+
+    ```bash
+    alembic upgrade head
+    ```
+
+---
+
+### Full Database Reset
+
+If you need to completely wipe the database and start fresh, use this workflow. **Warning: This will destroy all data.**
+
+1.  **Clean up the database container:** Stop and remove the old Docker container.
+
+    ```bash
+    docker stop waystation-db
+    docker rm waystation-db
+    ```
+
+2.  **Delete Alembic versions:** Manually delete all files from the `versions/` folder.
+
+3.  **Start a new database container:** Spin up a fresh database instance.
+
+    ```bash
+    docker run --name waystation-db -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=waystation -p 5432:5432 -d postgres:16-alpine
+    ```
+
+4.  **Create initial tables:** Generate and apply a new migration to set up the database from scratch.
+
+    ```bash
+    alembic revision --autogenerate -m "Create initial tables"
+    alembic upgrade head
+    python seed.py
+    ```
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/alembic-readme.md ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/architecture-scalability.md ===
+# Core Problem
+The core problem is converting unstructured email text into structured, usable data for analysis and decision-making (at scale).
+
+# My Limited Business Context Knowledge of Waystation
+In the short term, waystation will focus on core data extraction and automated responses to augment the procurement manager, while the long-term vision includes analytics, a framework for continuous improvement, and full automation of this procurement workflow with minimal human intervention i.e auto drafting + sending of emails to suppliers, choosing suppliers based on a robustly populated comparison table + i'm sure there is more.
+
+# Short Term Architecture + Features + Design Decisions (Regarding Waystation)
+## Proposed Architecture:
+A decoupled, event-driven architecture designed to handle spiky, asynchronous workloads.
+
+## Email Ingestion and Queuing:
+Incoming supplier emails are received and immediately placed in a message queue. This acts as a buffer, ensuring that no email is lost during high volume periods and decouples the ingestion process from the processing logic.
+
+## Asynchronous Workers
+A set of "worker" services pulls emails from the queue for processing. Each worker is responsible for invoking the LLM to perform data extraction. If an email fails to parse, an alert is sent to a human operator for review.
+
+## Clarification on the Role of LLMs: Chaining vs. Agentic Approaches
+System's core intelligence / features rely on LLMs, and there are a few ways to implement this that come to mind.
+
+For the initial, short-term goals, a chained deterministic approach is probably the most effective. This would involve a series of sequential, pre-defined LLM calls where the output of one call serves as the input for the next. The logic would follow a clear, predictable path (these bullet points are not comprehensive as I'd need to learn more about the features of waystation)
+    1. Classification: LLM classifies the incoming email (e.g. "requires extraction", "spam", "etc")
+    2. Data Extraction: If classified as "requires extraction," the LLM extracts key data points and outputs them in a structured format (JSON)
+    3. Validation and Decision Making: Use the structured data to update the database record and check if all buyer requirements were met. Also assess the confidence level of the extraction.
+    4. Response Generation: Based on the vlaidation, the system uses LLMs to draft context-aware response emails (e.g. "Thank you for the complete bid" or "We are missing pricing information, please provid x,y,z, etc" )
+
+Personally I think the chained approach is well-suited for the short term because the workflow is relatively straightforward (I think?) with limited, well-defined branches in logic. Maybe as the system matures and there are way more application features (and therefore potential tools for an agent to use) you might require an agent. An agent in this case could be useful as it could break down a high-level goal, create sub problems, and choose from teh set of application features (tools) to achieve the objective. This would be way more complex to build out but would be powerful (imo) for handling hihgly non-deterministic senarios tha require dynamic, multi-step actions. But for now the chaine approach prvides the best balance of simplicity, reliability and effectivness for the core business problem.
+
+## User Interface:
+Provide procurement manager with dashboard to initate requests, monitor ongoing bids, view comparison table, and interact with data. Key Feature: UI enables procurement managers to click on any data point in comparison table and see its exact source in the original email, fulfilling the transparency requirement.
+
+## LLM Cost vs Accuracy
+
+Tradeoff: Using more powerful LLMs provides the highest accuracy for data extraction but comes with higher costs. Using smaller, more cost-effective models would reduce expenses but might increase parsing errors and require more human intervention.
+
+Decision: The initial approach favors using more accurate models. While more expensive, this builds user trust in the system's ability to provide a robust and reliable database of record. A strong validation and testing framework will be crucial for managing this trade-off over time.
+    Side note: Creating a validation and testing framework would be **extremely important** to solving the accuracy/cost/value problem above. 
+
+
+# Architectural Overview & Scalability Notes (For Demo App)
+Due to time constraints, this application uses a decoupled, synchronous architecutre for faster development and clarity. Frontend and backend are separate services.
+
+## Key Architectural Components
+1. Frontend (React + TypeScript): A single-page application (SPA) built with React and TypeScript. Tailwind CSS was chosen bc it enables fast UI development without complex custom styling.
+2. Backend (Python + FastAPI): A RESTful API built with FastAPI.
+3. Database (PostgreSQL): A robust relational database for storing structured data like suppliers, RFQs, and quotes. The use of Alembic provides a version-controlled database migration system, making schema changes reliable.
+4. LLM Integration (Google Gemini API): The core intelligence is a modular service that communicates with the Google Gemini API. This is decoupled from the main API logic, making it easy to swap out different LLMs or add new ones without changing core business logic.
+
+## Scalability Considerations
+1. Decoupled Services: The frontend and backend can be hosted on separate servers and scaled horizontally based on traffic.
+2. Asynchronous Backend: FastAPI’s asynchronous nature allows the backend to handle a large number of concurrent requests, particularly for I/O-bound tasks like database queries and LLM API calls.
+3. Improvements if I could: For true production readiness, the current synchronous LLM processing would be replaced with an event-driven architecture. Submitting an email would trigger an event, queuing the LLM job for asynchronous processing. This would prevent API endpoints from timing out and improve user experience by providing immediate feedback while the LLM calls work in the background.
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/architecture-scalability.md ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/things-id-want-to-do.md ===
+1. Create a super transparent workflow where users can easily trace which email and etc produced the extracted piece of information that they see. Human can click through the audit trail. 
+2. SSE in a real live system. 
+3. Mock testing LLM services and extraction
+4. Lots of small usability ui tweaks
+    a. clearly identify which quotes need follow up
+    b. make the comparison quote page a table for easy comparison
+5. Suite of integration and end to end tests
+6. Reduce the overly complex frontend components and functions
+7. Refactor variable names to e clearer and more consistent
+8. Actual git workflow for ocmmits, branhces, etc
+9. 
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/docs/things-id-want-to-do.md ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic/script.py.mako ===
+"""${message}
+
+Revision ID: ${up_revision}
+Revises: ${down_revision | comma,n}
+Create Date: ${create_date}
+
+"""
+from typing import Sequence, Union
+
+from alembic import op
+import sqlalchemy as sa
+${imports if imports else ""}
+
+# revision identifiers, used by Alembic.
+revision: str = ${repr(up_revision)}
+down_revision: Union[str, Sequence[str], None] = ${repr(down_revision)}
+branch_labels: Union[str, Sequence[str], None] = ${repr(branch_labels)}
+depends_on: Union[str, Sequence[str], None] = ${repr(depends_on)}
+
+
+def upgrade() -> None:
+    """Upgrade schema."""
+    ${upgrades if upgrades else "pass"}
+
+
+def downgrade() -> None:
+    """Downgrade schema."""
+    ${downgrades if downgrades else "pass"}
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic/script.py.mako ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic/env.py ===
+# alembic/env.py
+from logging.config import fileConfig
+
+from sqlalchemy import pool
+from sqlalchemy.engine import Connection
+from sqlalchemy.ext.asyncio import async_engine_from_config
+
+from alembic import context
+
+# Import your application's config and models
+from app.config import config as app_config
+from app.services.database import Base
+from app import models # noqa: F401
+
+# this is the Alembic Config object, which provides
+# access to the values within the .ini file in use.
+config = context.config
+
+# Set the sqlalchemy.url from your app's config
+config.set_main_option("sqlalchemy.url", app_config.DB_CONFIG)
+
+# Interpret the config file for Python logging.
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
+
+# add your model's MetaData object here
+# for 'autogenerate' support
+target_metadata = Base.metadata
+
+def run_migrations_offline() -> None:
+    """Run migrations in 'offline' mode.
+
+    This configures the context with just a URL
+    and not an Engine, though an Engine is acceptable
+    here as well.  By skipping the Engine creation
+    we don't even need a DBAPI to be available.
+
+    Calls to context.execute() here emit the given string to the
+    script output.
+
+    """
+    url = config.get_main_option("sqlalchemy.url")
+    context.configure(
+        url=url,
+        target_metadata=target_metadata,
+        literal_binds=True,
+        dialect_opts={"paramstyle": "named"},
+    )
+
+    with context.begin_transaction():
+        context.run_migrations()
+
+
+def do_run_migrations(connection: Connection) -> None:
+    context.configure(connection=connection, target_metadata=target_metadata)
+
+    with context.begin_transaction():
+        context.run_migrations()
+
+
+async def run_async_migrations() -> None:
+    """In this scenario we need to create an Engine
+    and associate a connection with the context.
+    """
+    connectable = async_engine_from_config(
+        config.get_section(config.config_ini_section, {}),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+
+    async with connectable.connect() as connection:
+        await connection.run_sync(do_run_migrations)
+
+    await connectable.dispose()
+
+
+def run_migrations_online() -> None:
+    """Run migrations in 'online' mode."""
+    import asyncio
+    asyncio.run(run_async_migrations())
+
+if context.is_offline_mode():
+    run_migrations_offline()
+else:
+    run_migrations_online()
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic/env.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic/versions/5e1458004792_add_timezone_to_rfq_due_date.py ===
+"""add timezone to rfq due_date
+
+Revision ID: 5e1458004792
+Revises: db71d1ec1cbb
+Create Date: 2025-09-04 22:41:19.440426
+
+"""
+from typing import Sequence, Union
+
+from alembic import op
+import sqlalchemy as sa
+from sqlalchemy.dialects import postgresql
+
+# revision identifiers, used by Alembic.
+revision: str = '5e1458004792'
+down_revision: Union[str, Sequence[str], None] = 'db71d1ec1cbb'
+branch_labels: Union[str, Sequence[str], None] = None
+depends_on: Union[str, Sequence[str], None] = None
+
+
+def upgrade() -> None:
+    """Upgrade schema."""
+    # ### commands auto generated by Alembic - please adjust! ###
+    op.alter_column('rfqs', 'due_date',
+               existing_type=postgresql.TIMESTAMP(),
+               type_=sa.DateTime(timezone=True),
+               existing_nullable=True)
+    # ### end Alembic commands ###
+
+
+def downgrade() -> None:
+    """Downgrade schema."""
+    # ### commands auto generated by Alembic - please adjust! ###
+    op.alter_column('rfqs', 'due_date',
+               existing_type=sa.DateTime(timezone=True),
+               type_=postgresql.TIMESTAMP(),
+               existing_nullable=True)
+    # ### end Alembic commands ###
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic/versions/5e1458004792_add_timezone_to_rfq_due_date.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic/versions/db71d1ec1cbb_create_initial_tables.py ===
+"""Create initial tables
+
+Revision ID: db71d1ec1cbb
+Revises: 
+Create Date: 2025-09-04 22:34:43.840444
+
+"""
+from typing import Sequence, Union
+
+from alembic import op
+import sqlalchemy as sa
+from sqlalchemy.dialects import postgresql
+
+# revision identifiers, used by Alembic.
+revision: str = 'db71d1ec1cbb'
+down_revision: Union[str, Sequence[str], None] = None
+branch_labels: Union[str, Sequence[str], None] = None
+depends_on: Union[str, Sequence[str], None] = None
+
+
+def upgrade() -> None:
+    """Upgrade schema."""
+    # ### commands auto generated by Alembic - please adjust! ###
+    op.create_table('certifications',
+    sa.Column('id', sa.String(), nullable=False),
+    sa.Column('name', sa.String(), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
+    )
+    op.create_table('rfqs',
+    sa.Column('id', sa.String(), nullable=False),
+    sa.Column('item', sa.String(), nullable=False),
+    sa.Column('due_date', sa.DateTime(), nullable=True),
+    sa.Column('amount_required_lbs', sa.Float(), nullable=True),
+    sa.Column('ship_to_location', sa.String(), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('suppliers',
+    sa.Column('id', sa.String(), nullable=False),
+    sa.Column('company_name', sa.String(), nullable=False),
+    sa.Column('contact_name', sa.String(), nullable=True),
+    sa.Column('contact_email', sa.String(), nullable=False),
+    sa.Column('contact_phone', sa.String(), nullable=True),
+    sa.Column('hq_address', sa.String(), nullable=True),
+    sa.Column('payment_terms', sa.String(), nullable=True),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('company_name'),
+    sa.UniqueConstraint('contact_email')
+    )
+    op.create_table('quotes',
+    sa.Column('id', sa.String(), nullable=False),
+    sa.Column('date_submitted', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('supplier_id', sa.String(), nullable=False),
+    sa.Column('price_per_pound', sa.Numeric(precision=10, scale=2), nullable=True),
+    sa.Column('country_of_origin', sa.String(), nullable=True),
+    sa.Column('min_order_quantity', sa.Integer(), nullable=True),
+    sa.Column('rfq_id', sa.String(), nullable=False),
+    sa.ForeignKeyConstraint(['rfq_id'], ['rfqs.id'], ),
+    sa.ForeignKeyConstraint(['supplier_id'], ['suppliers.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('supplier_id', 'rfq_id', name='_supplier_rfq_uc')
+    )
+    op.create_table('rfq_certifications',
+    sa.Column('rfq_id', sa.String(), nullable=False),
+    sa.Column('certification_id', sa.String(), nullable=False),
+    sa.ForeignKeyConstraint(['certification_id'], ['certifications.id'], ),
+    sa.ForeignKeyConstraint(['rfq_id'], ['rfqs.id'], ),
+    sa.PrimaryKeyConstraint('rfq_id', 'certification_id')
+    )
+    op.create_table('emails',
+    sa.Column('id', sa.String(), nullable=False),
+    sa.Column('raw_text', sa.Text(), nullable=False),
+    sa.Column('extracted_data', postgresql.JSONB(astext_type=sa.Text()), nullable=True),
+    sa.Column('quote_id', sa.String(), nullable=False),
+    sa.ForeignKeyConstraint(['quote_id'], ['quotes.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('quote_certifications',
+    sa.Column('quote_id', sa.String(), nullable=False),
+    sa.Column('certification_id', sa.String(), nullable=False),
+    sa.ForeignKeyConstraint(['certification_id'], ['certifications.id'], ),
+    sa.ForeignKeyConstraint(['quote_id'], ['quotes.id'], ),
+    sa.PrimaryKeyConstraint('quote_id', 'certification_id')
+    )
+    # ### end Alembic commands ###
+
+
+def downgrade() -> None:
+    """Downgrade schema."""
+    # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_table('quote_certifications')
+    op.drop_table('emails')
+    op.drop_table('rfq_certifications')
+    op.drop_table('quotes')
+    op.drop_table('suppliers')
+    op.drop_table('rfqs')
+    op.drop_table('certifications')
+    # ### end Alembic commands ###
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/backend/alembic/versions/db71d1ec1cbb_create_initial_tables.py ===
+
+=== PROJECT FILE TREE ===
+.
+├── __pycache__
+│   ├── run.cpython-313.pyc
+│   └── test_db_connection.cpython-313-pytest-8.4.2.pyc
+├── alembic
+│   ├── __pycache__
+│   │   └── env.cpython-313.pyc
+│   ├── env.py
+│   ├── README
+│   ├── script.py.mako
+│   └── versions
+│       ├── __pycache__
+│       │   ├── 5e1458004792_add_timezone_to_rfq_due_date.cpython-313.pyc
+│       │   ├── 5e98e4f1f561_create_initial_tables.cpython-313.pyc
+│       │   ├── a3ff19f5b6c2_create_initial_tables.cpython-313.pyc
+│       │   └── db71d1ec1cbb_create_initial_tables.cpython-313.pyc
+│       ├── 5e1458004792_add_timezone_to_rfq_due_date.py
+│       └── db71d1ec1cbb_create_initial_tables.py
+├── alembic.ini
+├── app
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-313.pyc
+│   │   ├── config.cpython-313.pyc
+│   │   └── models.cpython-313.pyc
+│   ├── config.py
+│   ├── models.py
+│   ├── services
+│   │   ├── __pycache__
+│   │   │   ├── database.cpython-313.pyc
+│   │   │   ├── llm_client.cpython-313.pyc
+│   │   │   └── quote_processor.cpython-313.pyc
+│   │   ├── database.py
+│   │   ├── llm_client.py
+│   │   └── quote_processor.py
+│   └── views
+│       ├── __pycache__
+│       │   ├── quotes.cpython-313.pyc
+│       │   ├── rfqs.cpython-313.pyc
+│       │   └── suppliers.cpython-313.pyc
+│       ├── quotes.py
+│       ├── rfqs.py
+│       └── suppliers.py
+├── backend_code_context.txt
+├── code_context.py
+├── docs
+│   ├── alembic-readme.md
+│   ├── architecture-scalability.md
+│   ├── assumptions.md
+│   ├── sample-data.md
+│   └── things-id-want-to-do.md
+├── extract_quote.py
+├── notes
+│   ├── architecture-notes-prompting.md
+│   ├── business-requirements-considerations.md
+│   ├── db-readme.md
+│   └── tailwindcss-prompt.md
+├── pyproject.toml
+├── README.md
+├── run.py
+├── seed.py
+├── tests
+│   └── integration
+│       ├── __pycache__
+│       │   ├── conftest.cpython-313-pytest-8.4.2.pyc
+│       │   ├── test_api.cpython-313-pytest-8.4.2.pyc
+│       │   ├── test_database_connection.cpython-313-pytest-8.4.2.pyc
+│       │   └── test_validation.cpython-313-pytest-8.4.2.pyc
+│       ├── conftest.py
+│       ├── test_api.py
+│       └── test_validation.py
+└── uv.lock
+
+17 directories, 55 files

@@ -1,0 +1,1870 @@
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/tsconfig.node.json ===
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/tsconfig.node.json ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/index.html ===
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/index.html ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/tailwind.config.js ===
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/tailwind.config.js ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/tsconfig.app.json ===
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/tsconfig.app.json ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/README.md ===
+# Frontend Setup
+
+### Prerequisites
+
+  - **Node.js** (version 18 or higher recommended)
+  - **Yarn** or **npm**
+
+### Quickstart
+
+1.  **Install dependencies.**
+    Install the Node.js packages with Yarn:
+
+    ```bash
+    yarn
+    ```
+
+2.  **Start the development server.**
+    Run the Vite development server:
+
+    ```bash
+    yarn dev
+    ```
+
+    The frontend will be available at `http://localhost:3000`.
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/README.md ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/package.json ===
+{
+  "name": "rfq",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "tw:init": "tailwindcss init -p"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "3",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.39.1",
+    "vite": "^7.1.2"
+  }
+}
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/package.json ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/tsconfig.json ===
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "assets/*": ["assets/*"],
+      "components/*": ["components/*"],
+      "utils/*": ["utils/*"],
+      "modules/*": ["modules/*"],
+      "api/*": ["api/*"]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/tsconfig.json ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/eslint.config.js ===
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { globalIgnores } from 'eslint/config'
+
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+])
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/eslint.config.js ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/vite.config.ts ===
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tsconfigPaths from "vite-tsconfig-paths";
+
+// https://vite.dev/config/
+export default defineConfig({
+  server: {
+    port: 3000
+  },
+  plugins: [react(), tsconfigPaths()],
+})
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/vite.config.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/postcss.config.js ===
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/postcss.config.js ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/code_context.py ===
+import os
+import subprocess
+from pathlib import Path
+from typing import List
+
+def load_gitignore_patterns(gitignore_path: Path) -> List[str]:
+    """Loads and returns patterns from a .gitignore file."""
+    if not gitignore_path.exists():
+        return []
+    with gitignore_path.open("r") as f:
+        return [line.strip() for line in f if line.strip() and not line.startswith("#")]
+
+def is_ignored(file_path: Path, patterns: List[str]) -> bool:
+    """Checks if a file path is ignored by the gitignore patterns."""
+    relative_path = str(file_path.relative_to(Path.cwd()))
+    for pattern in patterns:
+        if file_path.match(pattern) or relative_path.startswith(pattern.rstrip("/")):
+            return True
+    return False
+
+def collect_file_content(file_path: Path, max_lines: int = 500) -> str:
+    """Collects content from a file, adding a header and footer."""
+    with file_path.open("r", encoding="utf-8", errors="ignore") as f:
+        lines = f.readlines()
+    if len(lines) > max_lines:
+        return ""
+    header = f"\n=== START FILE: {file_path} ===\n"
+    footer = f"\n=== END FILE: {file_path} ===\n"
+    return header + "".join(lines) + footer
+
+def main() -> None:
+    """Main function to collect frontend code context."""
+    base_dir = Path.cwd()
+    output_file = base_dir / "frontend_code_context.txt"
+    gitignore_patterns = load_gitignore_patterns(base_dir / ".gitignore")
+
+    # Define common directories and files to always exclude for frontend projects.
+    always_excluded = {
+        ".git",
+        "node_modules",
+        "dist",
+        "build",
+        "public"
+    }
+
+    # You can add specific file extensions to ignore if needed, but the .gitignore should handle most cases.
+    always_excluded_file_names = {
+        "yarn.lock",
+        "package-lock.json",
+        ".gitignore",
+    }
+
+    with output_file.open("w", encoding="utf-8") as out:
+        for root, dirs, files in os.walk(base_dir):
+            # Exclude specified directories from the walk
+            dirs[:] = [d for d in dirs if d not in always_excluded]
+            
+            for file in files:
+                file_path = Path(root) / file
+                
+                # Exclude based on gitignore and specific file names
+                if file_path.name in always_excluded_file_names or is_ignored(file_path, gitignore_patterns):
+                    continue
+
+                if file_path == output_file:
+                    continue
+
+                try:
+                    content = collect_file_content(file_path)
+                    if content:
+                        out.write(content)
+                except Exception:
+                    continue
+
+        # Append the project file tree
+        out.write("\n=== PROJECT FILE TREE ===\n")
+        try:
+            # Corrected: Use the -I flag for excluding directories and files with the BSD tree command.
+            exclude_args = []
+            for d in always_excluded:
+                exclude_args.extend(["-I", d])
+            
+            tree_output = subprocess.check_output(["tree", *exclude_args], text=True)
+            out.write(tree_output)
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            out.write("Could not generate tree output. 'tree' command not found or failed.\n")
+
+if __name__ == "__main__":
+    main()
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/code_context.py ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/App.tsx ===
+// /Users/duncan/dev/personal-projects/waystation/frontend/src/App.tsx
+import { useState, ReactElement } from "react";
+import SuppliersView from "modules/SuppliersView";
+import RFQsView from "modules/RFQView";
+import QuoteComparisonView from "modules/QuoteComparisonView";
+import QuotesView from "modules/QuotesView";
+import { RFQ } from "types/rfq";
+import { TbUser, TbFileDownload, TbReceipt } from "react-icons/tb";
+
+type View = "suppliers" | "rfqs" | "quotes";
+
+export default function App() {
+  const [currentView, setCurrentView] = useState<View>("rfqs");
+  const [selectedRfq, setSelectedRfq] = useState<RFQ | null>(null);
+
+  const handleRfqSelect = (rfq: RFQ) => {
+    setSelectedRfq(rfq);
+  };
+
+  const handleBack = () => {
+    setSelectedRfq(null);
+  };
+
+  const navItems: { key: View; label: string; icon: ReactElement }[] = [
+    {
+      key: "suppliers",
+      label: "Suppliers",
+      icon: <TbUser size="30px" />,
+    },
+    {
+      key: "rfqs",
+      label: "RFQs",
+      icon: <TbFileDownload size="30px" />,
+    },
+    {
+      key: "quotes",
+      label: "Quotes",
+      icon: <TbReceipt size="30px" />,
+    },
+  ];
+
+  return (
+    <div className="flex min-h-screen bg-gray-100 text-gray-900 font-sans">
+      <aside className="w-24 border-r border-gray-200 bg-white flex flex-col items-center py-6 gap-6 shadow-md">
+        <h1 className="text-lg font-semibold">Portal</h1>
+        <nav className="flex flex-col items-center gap-6 w-full">
+          {navItems.map((item) => (
+            <button
+              key={item.key}
+              onClick={() => setCurrentView(item.key)}
+              className={`group flex flex-col items-center justify-center gap-1 w-full p-2 transition rounded-md
+                ${
+                  currentView === item.key
+                    ? "text-blue-600 bg-blue-100"
+                    : "text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+                }
+              `}
+            >
+              <div className="grid h-10 w-10 place-items-center">
+                <div className="relative flex items-center justify-center h-5 w-5">
+                  {item.icon}
+                </div>
+              </div>
+              <span className="text-xs font-medium">{item.label}</span>
+            </button>
+          ))}
+        </nav>
+      </aside>
+
+      <main className="flex-1 p-6">
+        {selectedRfq ? (
+          <QuoteComparisonView rfq={selectedRfq} onBack={handleBack} />
+        ) : (
+          <>
+            {currentView === "suppliers" && <SuppliersView />}
+            {currentView === "rfqs" && (
+              <RFQsView onRfqSelect={handleRfqSelect} />
+            )}
+            {currentView === "quotes" && <QuotesView />}
+          </>
+        )}
+      </main>
+    </div>
+  );
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/App.tsx ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/main.tsx ===
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/main.tsx ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/App.css ===
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/App.css ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/index.css ===
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/index.css ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/vite-env.d.ts ===
+/// <reference types="vite/client" />
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/vite-env.d.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/config.ts ===
+const API_URL = "http://localhost:8000"; // Set default immediately
+
+export {API_URL}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/config.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/types/rfq.ts ===
+// src/types/rfq.ts
+export interface Certification {
+  id: string;
+  name: string;
+}
+
+export interface RFQ {
+  id: string;
+  item: string;
+  due_date?: string;
+  amount_required_lbs?: number;
+  ship_to_location?: string;
+  required_certifications?: Certification[];
+}
+
+export interface RFQCreatePayload {
+  item: string;
+  due_date?: string | null;
+  amount_required_lbs?: number | null;
+  ship_to_location?: string;
+  required_certifications?: string[];
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/types/rfq.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/types/supplier.ts ===
+export interface Supplier {
+  id: string;
+  company_name: string;
+  contact_name: string | null;
+  contact_email: string;
+  contact_phone: string | null;
+  hq_address: string | null;
+  payment_terms: string | null;
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/types/supplier.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/types/quote.ts ===
+// /Users/duncan/dev/personal-projects/waystation/frontend/src/types/quote.ts
+import { Certification } from "./rfq";
+
+export interface SupplierComparison {
+  company_name: string;
+  contact_name?: string | null;
+  hq_address?: string | null;
+  payment_terms?: string | null;
+}
+
+export interface Quote {
+  id: string;
+  date_submitted: string;
+  price_per_pound?: number | null;
+  country_of_origin?: string | null;
+  min_order_quantity?: number | null;
+  certifications: Certification[];
+  supplier: SupplierComparison;
+}
+
+interface RFQInfo {
+  id: string;
+  item: string;
+}
+
+export interface FullQuote extends Quote {
+  rfq: RFQInfo;
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/types/quote.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/utils/api.ts ===
+import { API_URL } from "config";
+
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface IOptions extends RequestInit {}
+
+class FetchJson {
+    private _baseUrl: string;
+    private _options: IOptions;
+
+    /**
+     * Creates an instance of FetchJson.
+     * @param baseUrl The base URL to prefix on all API calls
+     * @param options Optional option overrides (see standard fetch options)
+     */
+    constructor(baseUrl: string, options: IOptions = {}) {
+        this._baseUrl = baseUrl;
+        this._options = options;
+    }
+
+    /**
+     * Private implementation for making API requests
+     *
+     * @private
+     * @param method GET, POST, etc
+     * @param url URL to make the request to
+     * @param [data] Either an object to be serialized in the body or to be put into the query string for GET requests
+     * @returns A promise that
+     */
+    private async request(method: string, url: string, data?: unknown) {
+        const settings: IOptions = {
+            method: method.toUpperCase(),
+            ...this._options,
+        };
+
+        url = `${this._baseUrl}${url}`; // Set this to our app url + url from request caller
+        const isGetRequest = settings.method === "GET";
+
+        const headers: Record<string, string> = {
+            accept: "application/json",
+        };
+
+        if (data) {
+            if (isGetRequest) {
+                const params = data as Record<string, string>;
+                const paramKeys = Object.keys(params);
+                if (paramKeys && paramKeys.length) {
+                    url =
+                        url +
+                        (url.includes("?") ? "&" : "?") +
+                        paramKeys.map((key) => `${key}=${encodeURIComponent(params[key])}`).join("&");
+                }
+            } else {
+                headers["Content-Type"] = "application/json";
+                settings.body = JSON.stringify(data);
+            }
+        }
+
+        settings.headers = headers;
+
+        const response = await fetch(url, settings);
+
+        if (!response.ok) {
+            const errorBody = await response.json().catch(() => ({
+                detail: response.statusText,
+            }));
+            console.error(`API Error: ${response.status} ${response.statusText}`, errorBody);
+            throw new Error(errorBody.detail || `Request failed with status ${response.status}`);
+        }
+
+        if (response.status === 204) {
+            // No content to return
+            return;
+        }
+
+        return await response.json();
+    }
+
+    /**
+     * Make a GET api request
+     *
+     * @template T The type of object that will be returned by the API call
+     * @param url The URL for the request
+     * @param [params] Key/value pairs to be included on the querystring
+     * @returns The object returned by the API call
+     */
+    public async get<T>(url: string, params?: Record<string, string>): Promise<T> {
+        return await this.request("GET", url, params);
+    }
+
+    /**
+     * Make a POST api request
+     *
+     * @template T The type of the object that will be returned by the API call
+     * @param url The URL for the request
+     * @param [data] An object to be serialized and included in the request body
+     * @returns The object returned by the API call
+     */
+    public async post<T>(url: string, data?: unknown): Promise<T> {
+        return await this.request("POST", url, data);
+    }
+
+    /**
+     * Make a PUT api request
+     *
+     * @template T The type of the object that will be returned by the API call
+     * @param url The URL for the request
+     * @param [data] An object to be serialized and included in the request body
+     * @returns The object returned by the API call
+     */
+    public async put<T>(url: string, data?: unknown): Promise<T> {
+        return await this.request("PUT", url, data);
+    }
+
+    /**
+     * Make a PATCH api request
+     *
+     * @template T The type of the object that will be returned by the API call
+     * @param url The URL for the request
+     * @param [data] An object to be serialized and included in the request body
+     * @returns The object returned by the API call
+     */
+    public async patch<T>(url: string, data?: unknown): Promise<T> {
+        return await this.request("PATCH", url, data);
+    }
+
+    /**
+     * Make a DELETE api request
+     *
+     * @template T The type of the object that will be returned by the API call
+     * @param url The URL for the request
+     * @param [data] An object to be serialized and included in the request body
+     * @returns The object returned by the API call
+     */
+    public async delete<T>(url: string, data?: unknown): Promise<T> {
+        return await this.request("DELETE", url, data);
+    }
+}
+
+// Assuming API_URL is correctly imported from a config file.
+// If not, you might want to replace it with a hardcoded string or environment variable.
+const api = new FetchJson(API_URL);
+export default api;
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/utils/api.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/components/Modal.tsx ===
+// src/components/Modal.tsx
+import { ReactNode } from "react";
+import { TbX } from "react-icons/tb";
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: ReactNode;
+}
+
+export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 relative"
+        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+      >
+        <div className="flex justify-between items-center pb-4 border-b border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600 p-1 rounded-full transition-colors"
+            aria-label="Close modal"
+          >
+            <TbX size={24} />
+          </button>
+        </div>
+        <div className="mt-4">{children}</div>
+      </div>
+    </div>
+  );
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/components/Modal.tsx ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGetSuppliers.ts ===
+import { useState, useCallback } from 'react';
+import { getSuppliers as fetchSuppliersApi } from 'api/supplier-api';
+import { Supplier } from 'types/supplier';
+
+export const useGetSuppliers = () => {
+  const [suppliers, setSuppliers] = useState<Supplier[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  // useCallback ensures this function isn't recreated on every render
+  const execute = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await fetchSuppliersApi();
+      setSuppliers(result);
+    } catch (err) {
+      setError(err as Error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []); // Empty dependency array means the function is created only once
+
+  return { suppliers, isLoading, error, execute };
+};
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGetSuppliers.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGetRFQs.ts ===
+import { useState, useCallback } from "react";
+import { getRFQs as fetchRFQsApi } from "api/rfq-api";
+import { RFQ } from "types/rfq";
+
+export const useGetRFQs = () => {
+  const [rfqs, setRFQs] = useState<RFQ[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const execute = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await fetchRFQsApi();
+      setRFQs(result);
+    } catch (err) {
+      setError(err as Error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return { rfqs, isLoading, error, execute };
+};
+
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGetRFQs.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGenerateClarificationEmail.ts ===
+// /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGenerateClarificationEmail.ts
+import { useState, useCallback } from "react";
+import { generateClarificationEmail as generateEmailApi } from "api/quote-api";
+
+export const useGenerateClarificationEmail = () => {
+  const [data, setData] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const execute = useCallback(async (quoteId: string) => {
+    if (!quoteId) {
+      setError(new Error("Quote ID is required."));
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    setData(null); // Clear previous data on new execution
+    try {
+      const result = await generateEmailApi(quoteId);
+      setData(result.email_text);
+      return result.email_text;
+    } catch (err) {
+      setError(err as Error);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return { data, isLoading, error, execute };
+};
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGenerateClarificationEmail.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useProcessEmail.ts ===
+// src/hooks/useProcessEmail.ts
+import { useState, useCallback } from "react";
+import { processEmailForRfq as processEmailApi } from "api/rfq-api";
+import { Quote } from "types/quote";
+
+export const useProcessEmail = () => {
+  const [data, setData] = useState<Quote | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const execute = useCallback(async (rfqId: string, raw_text: string) => {
+    if (!rfqId || !raw_text) {
+      setError(new Error("RFQ ID and email text are required."));
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await processEmailApi(rfqId, raw_text);
+      setData(result);
+      return result; // Return result for immediate use
+    } catch (err) {
+      setError(err as Error);
+      throw err; // Re-throw to be caught by the calling component
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return { data, isLoading, error, execute };
+};
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useProcessEmail.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useCreateRFQ.ts ===
+// src/hooks/useCreateRFQ.ts
+import { useState, useCallback } from "react";
+import { createRFQ as createRfqApi } from "api/rfq-api";
+import { RFQ, RFQCreatePayload } from "types/rfq";
+
+export const useCreateRFQ = () => {
+  const [data, setData] = useState<RFQ | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const execute = useCallback(async (payload: RFQCreatePayload) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await createRfqApi(payload);
+      setData(result);
+      return result;
+    } catch (err) {
+      setError(err as Error);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return { data, isLoading, error, execute };
+};
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useCreateRFQ.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGetQuotesForRfq.ts ===
+// src/hooks/useGetQuotesForRfq.ts
+import { useState, useCallback } from "react";
+import { getQuotesForRfq as fetchQuotesApi } from "api/rfq-api";
+import { Quote } from "types/quote";
+
+export const useGetQuotesForRfq = () => {
+  const [quotes, setQuotes] = useState<Quote[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const execute = useCallback(async (rfqId: string) => {
+    if (!rfqId) return;
+
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await fetchQuotesApi(rfqId);
+      setQuotes(result);
+    } catch (err) {
+      setError(err as Error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return { quotes, isLoading, error, execute };
+};
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGetQuotesForRfq.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGetQuotes.ts ===
+// /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGetQuotes.ts
+import { useState, useCallback } from "react";
+import { getQuotes as fetchQuotesApi } from "api/quote-api";
+import { FullQuote } from "types/quote";
+
+export const useGetQuotes = () => {
+  const [quotes, setQuotes] = useState<FullQuote[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const execute = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await fetchQuotesApi();
+      setQuotes(result);
+    } catch (err) {
+      setError(err as Error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return { quotes, isLoading, error, execute };
+};
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/hooks/useGetQuotes.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/api/rfq-api.ts ===
+// src/api/rfq-api.ts
+import api from "utils/api";
+import { RFQ, RFQCreatePayload } from "types/rfq";
+import { Quote } from "types/quote";
+
+export const getRFQs = async (): Promise<RFQ[]> => {
+  return await api.get<RFQ[]>("/api/rfqs");
+};
+
+export const getQuotesForRfq = async (rfqId: string): Promise<Quote[]> => {
+  return await api.get<Quote[]>(`/api/rfqs/${rfqId}/quotes`);
+};
+
+export const createRFQ = async (rfqData: RFQCreatePayload): Promise<RFQ> => {
+  return await api.post<RFQ>("/api/rfqs", rfqData);
+};
+
+/**
+ * Sends raw email text to the backend for a specific RFQ to be processed.
+ * @param rfqId The ID of the RFQ the email belongs to.
+ * @param raw_text The full, plain text content of the supplier's email.
+ * @returns The newly created or updated Quote object.
+ */
+export const processEmailForRfq = async (
+  rfqId: string,
+  raw_text: string,
+): Promise<Quote> => {
+  return await api.post<Quote>(`/api/rfqs/${rfqId}/extract-quote-from-email`, {
+    raw_text,
+  });
+};
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/api/rfq-api.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/api/quote-api.ts ===
+// /Users/duncan/dev/personal-projects/waystation/frontend/src/api/quote-api.ts
+import api from "utils/api";
+import { FullQuote } from "types/quote";
+
+/**
+ * Fetches a list of all quotes from the backend.
+ */
+export const getQuotes = async (): Promise<FullQuote[]> => {
+  return await api.get<FullQuote[]>("/api/quotes");
+};
+
+/**
+ * Requests the backend to generate a clarification email for a given quote.
+ * @param quoteId The ID of the quote needing clarification.
+ * @returns An object containing the generated email text.
+ */
+export const generateClarificationEmail = async (quoteId: string): Promise<{ email_text: string }> => {
+  return await api.post<{ email_text: string }>(`/api/quotes/${quoteId}/generate-clarification-email`);
+};
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/api/quote-api.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/api/supplier-api.ts ===
+import api from "utils/api"; // Make sure the path to your api.ts is correct
+import { Supplier } from "types/supplier";
+
+/**
+ * Fetches a list of all suppliers from the backend.
+ */
+export const getSuppliers = async () => {
+  return await api.get<Supplier[]>("/api/suppliers");
+};
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/api/supplier-api.ts ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/modules/QuotesView.tsx ===
+// /Users/duncan/dev/personal-projects/waystation/frontend/src/modules/QuotesView.tsx
+import { useEffect } from "react";
+import { useGetQuotes } from "hooks/useGetQuotes";
+import { FullQuote } from "types/quote";
+
+const formatCurrency = (value: number | null | undefined) => {
+  if (value === null || typeof value === "undefined") return "-";
+  return `$${value.toFixed(2)}`;
+};
+
+export default function QuotesView() {
+  const { quotes, isLoading, error, execute } = useGetQuotes();
+
+  useEffect(() => {
+    execute();
+  }, [execute]);
+
+  return (
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-medium">All Quotes</h2>
+      </div>
+
+      {isLoading && <p className="text-gray-500 text-center py-4">Loading quotes...</p>}
+      {error && (
+        <p className="text-red-500 text-center py-4">
+          Failed to load quotes: {error.message}
+        </p>
+      )}
+
+      {!isLoading && quotes.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse">
+            <thead>
+              <tr className="text-left border-b border-gray-200 text-sm text-gray-500">
+                <th className="px-4 py-3 font-medium">RFQ Item</th>
+                <th className="px-4 py-3 font-medium">Supplier</th>
+                <th className="px-4 py-3 font-medium text-right">Price / lb</th>
+                <th className="px-4 py-3 font-medium">Country of Origin</th>
+                <th className="px-4 py-3 font-medium">Certifications</th>
+              </tr>
+            </thead>
+            <tbody>
+              {quotes.map((quote: FullQuote) => (
+                <tr
+                  key={quote.id}
+                  className="border-b border-gray-100 hover:bg-gray-50 transition"
+                >
+                  <td className="px-4 py-3">
+                    <div className="font-medium text-gray-800">{quote.rfq.item}</div>
+                    <div className="font-mono text-xs text-gray-400">
+                      {quote.rfq.id.substring(0, 8)}...
+                    </div>
+                  </td>
+                  <td className="px-4 py-3">{quote.supplier.company_name}</td>
+                  <td className="px-4 py-3 text-right font-medium text-gray-800">
+                    {formatCurrency(quote.price_per_pound)}
+                  </td>
+                  <td className="px-4 py-3">{quote.country_of_origin ?? "-"}</td>
+                  <td className="px-4 py-3">
+                    {quote.certifications?.length
+                      ? quote.certifications.map((cert) => cert.name).join(", ")
+                      : "-"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {!isLoading && quotes.length === 0 && !error && (
+        <div className="text-center py-12 border border-dashed border-gray-300 rounded-lg">
+          <h3 className="text-lg font-medium text-gray-800">No Quotes Found</h3>
+          <p className="mt-2 text-gray-500">
+            There are no quotes in the system yet.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/modules/QuotesView.tsx ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/modules/QuoteComparisonView.tsx ===
+// src/modules/QuoteComparisonView.tsx
+import { useEffect, useMemo, useState } from "react";
+import { useGetQuotesForRfq } from "hooks/useGetQuotesForRfq";
+import { RFQ, Certification } from "types/rfq";
+import { Quote } from "types/quote";
+import { FaRegCopy, FaCheck } from "react-icons/fa";
+import { TbMailPlus, TbHelpOctagon } from "react-icons/tb";
+import Modal from "components/Modal";
+import { useProcessEmail } from "hooks/useProcessEmail";
+import { useGenerateClarificationEmail } from "hooks/useGenerateClarificationEmail";
+
+interface QuoteComparisonViewProps {
+  rfq: RFQ;
+  onBack: () => void;
+}
+
+// Helper to find missing information
+const getMissingInfo = (quote: Quote, rfq: RFQ): string[] => {
+  const missing: string[] = [];
+  if (quote.price_per_pound == null) {
+    missing.push("Price per pound");
+  }
+  if (quote.country_of_origin == null) {
+    missing.push("Country of origin");
+  }
+  if (quote.min_order_quantity == null) {
+    missing.push("Minimum order quantity");
+  }
+
+  const quoteCertNames = new Set(quote.certifications.map((c) => c.name));
+  const requiredCertNames = rfq.required_certifications?.map((c) => c.name) ?? [];
+
+  for (const requiredCert of requiredCertNames) {
+    if (!quoteCertNames.has(requiredCert)) {
+      missing.push(`Certification: ${requiredCert}`);
+    }
+  }
+  return missing;
+};
+
+// Helper to style certification badges
+const CertificationBadge = ({ cert }: { cert: Certification }) => {
+  const colorClasses: { [key: string]: string } = {
+    Organic: "bg-green-100 text-green-800",
+    "Non-GMO": "bg-blue-100 text-blue-800",
+    Halal: "bg-teal-100 text-teal-800",
+    "Allergen Free": "bg-purple-100 text-purple-800",
+  };
+
+  const badgeClass = colorClasses[cert.name] || "bg-gray-100 text-gray-800";
+
+  return <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${badgeClass}`}>{cert.name}</span>;
+};
+
+// Helper to format date to Pacific Time
+const formatToPST = (dateString: string) => {
+  if (!dateString) return "-";
+  try {
+    return new Date(dateString).toLocaleString("en-US", {
+      timeZone: "America/Los_Angeles",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+  } catch (e) {
+    console.error("Invalid date format:", dateString);
+    console.error("formatToPST: ", e);
+    return "-";
+  }
+};
+
+export default function QuoteComparisonView({ rfq, onBack }: QuoteComparisonViewProps) {
+  const { quotes, isLoading, error, execute: fetchQuotes } = useGetQuotesForRfq();
+  const { execute: processEmail, isLoading: isProcessingEmail } = useProcessEmail();
+  const { data: generatedEmail, isLoading: isGeneratingEmail, error: generationError, execute: generateEmail } = useGenerateClarificationEmail();
+
+  const [copied, setCopied] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [emailText, setEmailText] = useState("");
+  const [formError, setFormError] = useState<string | null>(null);
+
+  // State for clarification modal
+  const [isClarificationModalOpen, setIsClarificationModalOpen] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  useEffect(() => {
+    fetchQuotes(rfq.id);
+  }, [fetchQuotes, rfq.id]);
+
+  const bestPrice = useMemo(() => {
+    if (quotes.length === 0) return null;
+    return Math.min(...quotes.map((q) => q.price_per_pound || Infinity));
+  }, [quotes]);
+
+  const sortedQuotes = useMemo(() => {
+    return [...quotes].sort((a, b) => {
+      const priceA = a.price_per_pound ?? Infinity;
+      const priceB = b.price_per_pound ?? Infinity;
+      if (priceA < priceB) return -1;
+      if (priceA > priceB) return 1;
+      return 0;
+    });
+  }, [quotes]);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(rfq.id);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    setEmailText("");
+    setFormError(null);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleEmailSubmit = async () => {
+    if (!emailText.trim()) {
+      setFormError("Email content cannot be empty.");
+      return;
+    }
+    setFormError(null);
+
+    try {
+      await processEmail(rfq.id, emailText);
+      handleCloseModal();
+      fetchQuotes(rfq.id);
+    } catch (err) {
+      console.error("Failed to process email:", err);
+      setFormError((err as Error).message || "An unexpected error occurred while processing the email.");
+    }
+  };
+
+  const handleRequestInfoClick = async (quoteId: string) => {
+    setIsClarificationModalOpen(true);
+    await generateEmail(quoteId);
+  };
+
+  const handleCloseClarificationModal = () => {
+    setIsClarificationModalOpen(false);
+  };
+
+  const handleCopyEmail = async () => {
+    if (!generatedEmail) return;
+    try {
+      await navigator.clipboard.writeText(generatedEmail);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy email text: ", err);
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-6">
+      {/* Header */}
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <button onClick={onBack} className="text-gray-500 hover:text-gray-900 transition-colors p-1 rounded-md hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div>
+            <h1 className="text-xl font-semibold">Quote Comparison</h1>
+            <p className="text-gray-500">
+              For RFQ: <span className="font-medium text-gray-700">{rfq.item}</span>
+            </p>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="text-sm text-gray-500">
+                RFQ ID: <span className="font-mono text-gray-700">{rfq.id}</span>
+              </span>
+              <button onClick={handleCopy} className={`text-gray-400 hover:text-gray-600 transition-all duration-300 ${copied ? "text-green-500" : ""}`} aria-label="Copy RFQ ID to clipboard">
+                {copied ? <FaCheck size={14} /> : <FaRegCopy size={14} />}
+              </button>
+            </div>
+          </div>
+        </div>
+        <button onClick={handleOpenModal} className="flex items-center gap-2 bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors shadow-sm">
+          <TbMailPlus size={20} />
+          Add Email Quote
+        </button>
+      </div>
+
+      {/* RFQ Details Summary */}
+      <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+          <div>
+            <dt className="text-gray-500">Amount Required</dt>
+            <dd className="font-medium text-gray-900 mt-1">{rfq.amount_required_lbs?.toLocaleString() ?? "-"} lbs</dd>
+          </div>
+          <div>
+            <dt className="text-gray-500">Due Date</dt>
+            <dd className="font-medium text-gray-900 mt-1">{rfq.due_date ? new Date(rfq.due_date).toLocaleDateString() : "-"}</dd>
+          </div>
+          <div>
+            <dt className="text-gray-500">Ship To</dt>
+            <dd className="font-medium text-gray-900 mt-1">{rfq.ship_to_location ?? "-"}</dd>
+          </div>
+          <div>
+            <dt className="text-gray-500">Required Certs</dt>
+            <dd className="font-medium text-gray-900 mt-1 flex flex-wrap gap-2">
+              {rfq.required_certifications?.length ? rfq.required_certifications.map((cert) => <CertificationBadge key={cert.id} cert={cert} />) : <span>-</span>}
+            </dd>
+          </div>
+        </div>
+      </div>
+
+      {/* Content Area */}
+      <div>
+        {isLoading && <p className="text-gray-500">Loading quotes...</p>}
+        {error && <p className="text-red-500">Failed to load quotes: {error.message}</p>}
+
+        {!isLoading && quotes.length > 0 && (
+          <div className="overflow-x-auto bg-white rounded-lg shadow-md border border-gray-200">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Supplier
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Price / lb
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Min. Order Qty
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Country of Origin
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Payment Terms
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Certifications
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Submitted (PST)
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {sortedQuotes.map((quote) => {
+                  const isBestPrice = quote.price_per_pound === bestPrice && bestPrice !== Infinity;
+                  const missingInfo = getMissingInfo(quote, rfq);
+                  const hasMissingInfo = missingInfo.length > 0;
+                  return (
+                    <tr key={quote.id} className={isBestPrice ? "bg-green-50" : ""}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-semibold text-gray-900">{quote.supplier.company_name}</div>
+                        <div className="text-sm text-gray-500">{quote.supplier.contact_name ?? "No contact"}</div>
+                      </td>
+                      <td className={`px-6 py-4 whitespace-nowrap text-right text-sm font-medium ${isBestPrice ? "text-green-600" : "text-gray-900"}`}>
+                        {quote.price_per_pound ? `$${quote.price_per_pound.toFixed(2)}` : "-"}
+                        {isBestPrice && <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Best</span>}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500">{quote.min_order_quantity ? `${quote.min_order_quantity.toLocaleString()} lbs` : "-"}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{quote.country_of_origin ?? "-"}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{quote.supplier.payment_terms ?? "-"}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex flex-wrap gap-1">
+                          {quote.certifications.length > 0 ? quote.certifications.map((cert) => <CertificationBadge key={cert.id} cert={cert} />) : <span className="text-sm text-gray-500">-</span>}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatToPST(quote.date_submitted)}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button onClick={() => handleRequestInfoClick(quote.id)} disabled={!hasMissingInfo} className="flex items-center gap-2 text-blue-600 hover:text-blue-800 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors">
+                          <TbHelpOctagon size={18} />
+                          Request Info
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {!isLoading && quotes.length === 0 && !error && (
+          <div className="text-center py-12 bg-white rounded-lg border border-dashed border-gray-300">
+            <h3 className="text-lg font-medium text-gray-800">No quotes yet</h3>
+            <p className="mt-2 text-gray-500">No quotes have been submitted. Add one by processing a supplier's email.</p>
+          </div>
+        )}
+      </div>
+
+      {/* Add Email Modal */}
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title={`Process Email for: ${rfq.item}`}>
+        <div className="flex flex-col gap-4">
+          <p className="text-sm text-gray-600">Paste the full content of an email from a supplier below. The system will automatically extract quote details, identify the supplier, and add or update their quote for this RFQ.</p>
+          <textarea
+            value={emailText}
+            onChange={(e) => setEmailText(e.target.value)}
+            placeholder="Subject: Quote for Soy Protein Isolate RFQ..."
+            className="w-full h-64 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition font-mono text-sm"
+            disabled={isProcessingEmail}
+          />
+
+          {formError && <p className="text-sm text-red-500 bg-red-50 p-3 rounded-md">{formError}</p>}
+
+          <div className="flex justify-end gap-3 pt-2">
+            <button onClick={handleCloseModal} className="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-gray-300 transition-colors" disabled={isProcessingEmail}>
+              Cancel
+            </button>
+            <button onClick={handleEmailSubmit} className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed" disabled={isProcessingEmail}>
+              {isProcessingEmail ? "Processing..." : "Extract & Save Quote"}
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Clarification Email Modal */}
+      <Modal isOpen={isClarificationModalOpen} onClose={handleCloseClarificationModal} title="Generated Clarification Email">
+        <div className="flex flex-col gap-4">
+          {isGeneratingEmail && (
+            <div className="text-center py-8">
+              <p className="text-gray-600">Generating email...</p>
+            </div>
+          )}
+
+          {generationError && (
+            <div className="bg-red-50 text-red-700 p-3 rounded-md">
+              <h4 className="font-bold">Error</h4>
+              <p>{generationError.message}</p>
+            </div>
+          )}
+
+          {generatedEmail && !isGeneratingEmail && (
+            <>
+              <p className="text-sm text-gray-600">Review the generated email below. You can copy it to your clipboard.</p>
+              <textarea readOnly value={generatedEmail} className="w-full h-64 p-3 border border-gray-300 rounded-md bg-gray-50 font-mono text-sm" />
+              <div className="flex justify-end gap-3 pt-2">
+                <button onClick={handleCloseClarificationModal} className="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-gray-300 transition-colors">
+                  Cancel
+                </button>
+                <button onClick={handleCopyEmail} className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+                  {emailCopied ? "Copied!" : "Copy Text"}
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </Modal>
+    </div>
+  );
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/modules/QuoteComparisonView.tsx ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/modules/SuppliersView.tsx ===
+import { useEffect } from "react";
+import { useGetSuppliers } from "../hooks/useGetSuppliers";
+import { Supplier } from "../types/supplier";
+
+export default function SuppliersView() {
+  const { suppliers, isLoading, error, execute } = useGetSuppliers();
+
+  useEffect(() => {
+    execute();
+  }, [execute]);
+
+  return (
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+      <h2 className="text-lg font-medium mb-4">Suppliers</h2>
+
+      {isLoading && <p className="text-gray-500">Loading suppliers...</p>}
+      {error && (
+        <p className="text-red-500">Failed to load suppliers: {error.message}</p>
+      )}
+
+      {!isLoading && suppliers.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse">
+            <thead>
+              <tr className="text-left border-b border-gray-200 text-gray-500">
+                <th className="px-4 py-2 font-medium">Company</th>
+                <th className="px-4 py-2 font-medium">Contact</th>
+                <th className="px-4 py-2 font-medium">Email</th>
+                <th className="px-4 py-2 font-medium">Phone</th>
+                <th className="px-4 py-2 font-medium">Payment Terms</th>
+              </tr>
+            </thead>
+            <tbody>
+              {suppliers.map((supplier: Supplier) => (
+                <tr
+                  key={supplier.id}
+                  className="border-b border-gray-200 hover:bg-gray-50 transition"
+                >
+                  <td className="px-4 py-2">{supplier.company_name}</td>
+                  <td className="px-4 py-2">{supplier.contact_name ?? "-"}</td>
+                  <td className="px-4 py-2">{supplier.contact_email}</td>
+                  <td className="px-4 py-2">{supplier.contact_phone ?? "-"}</td>
+                  <td className="px-4 py-2">{supplier.payment_terms ?? "-"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {!isLoading && suppliers.length === 0 && !error && (
+        <p className="text-gray-500">No suppliers available.</p>
+      )}
+    </div>
+  );
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/modules/SuppliersView.tsx ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/modules/RFQView.tsx ===
+// src/modules/RFQView.tsx
+
+import { useEffect, useState } from "react";
+import { useGetRFQs } from "hooks/useGetRFQs";
+import { RFQ, RFQCreatePayload } from "types/rfq";
+import Modal from "components/Modal";
+import { useCreateRFQ } from "hooks/useCreateRFQ";
+import { TbPlus } from "react-icons/tb";
+
+interface RFQsViewProps {
+  onRfqSelect: (rfq: RFQ) => void;
+}
+
+const INITIAL_FORM_STATE: RFQCreatePayload = {
+  item: "",
+  due_date: null,
+  amount_required_lbs: null,
+  ship_to_location: "",
+  required_certifications: [],
+};
+
+export default function RFQsView({ onRfqSelect }: RFQsViewProps) {
+  const { rfqs, isLoading, error, execute: fetchRfqs } = useGetRFQs();
+  const {
+    isLoading: isCreating,
+    error: createError,
+    execute: createRfq,
+  } = useCreateRFQ();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newRfqData, setNewRfqData] =
+    useState<RFQCreatePayload>(INITIAL_FORM_STATE);
+  const [certInput, setCertInput] = useState("");
+
+  useEffect(() => {
+    fetchRfqs();
+  }, [fetchRfqs]);
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
+    setNewRfqData((prev) => ({
+      ...prev,
+      [name]: type === "number" && value ? parseFloat(value) : value,
+    }));
+  };
+
+  const handleOpenModal = () => {
+    setNewRfqData(INITIAL_FORM_STATE);
+    setCertInput("");
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmit = async () => {
+    const payload: RFQCreatePayload = {
+      ...newRfqData,
+      amount_required_lbs: newRfqData.amount_required_lbs || null,
+      due_date: newRfqData.due_date || null,
+      required_certifications: certInput
+        .split(",")
+        .map((c) => c.trim())
+        .filter(Boolean),
+    };
+
+    try {
+      await createRfq(payload);
+      handleCloseModal();
+      fetchRfqs(); // Refresh the list
+    } catch (e) {
+      console.error("Failed to create RFQ:", e);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-medium">Requests for Quote (RFQs)</h2>
+        <button
+          onClick={handleOpenModal}
+          className="flex items-center gap-2 bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors shadow-sm"
+        >
+          <TbPlus size={20} />
+          New RFQ
+        </button>
+      </div>
+
+      {isLoading && <p className="text-gray-500">Loading RFQs...</p>}
+      {error && (
+        <p className="text-red-500">Failed to load RFQs: {error.message}</p>
+      )}
+
+      {!isLoading && rfqs.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse">
+            <thead>
+              <tr className="text-left border-b border-gray-200 text-gray-500">
+                <th className="px-4 py-2 font-medium">ID</th>
+                <th className="px-4 py-2 font-medium">Item</th>
+                <th className="px-4 py-2 font-medium">Due Date</th>
+                <th className="px-4 py-2 font-medium text-right">
+                  Amount (lbs)
+                </th>
+                <th className="px-4 py-2 font-medium">Ship To</th>
+                <th className="px-4 py-2 font-medium">Certifications</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rfqs.map((rfq: RFQ) => (
+                <tr
+                  key={rfq.id}
+                  // 👇 Add onClick handler and cursor styling
+                  className="border-b border-gray-200 hover:bg-gray-100 transition cursor-pointer"
+                  onClick={() => onRfqSelect(rfq)}
+                >
+                  <td className="px-4 py-2 font-mono text-xs text-gray-500">
+                    {rfq.id.substring(0, 8)}...
+                  </td>
+                  <td className="px-4 py-2 font-medium text-gray-800">
+                    {rfq.item}
+                  </td>
+                  <td className="px-4 py-2">
+                    {rfq.due_date
+                      ? new Date(rfq.due_date).toLocaleDateString()
+                      : "-"}
+                  </td>
+                  <td className="px-4 py-2 text-right">
+                    {rfq.amount_required_lbs?.toLocaleString() ?? "-"}
+                  </td>
+                  <td className="px-4 py-2">{rfq.ship_to_location ?? "-"}</td>
+                  <td className="px-4 py-2">
+                    {rfq.required_certifications?.length
+                      ? rfq.required_certifications
+                          .map((cert) => cert.name)
+                          .join(", ")
+                      : "-"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {!isLoading && rfqs.length === 0 && !error && (
+        <p className="text-gray-500">No RFQs available.</p>
+      )}
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title="Create a New Request for Quote"
+      >
+        <div className="flex flex-col gap-4">
+          <div>
+            <label
+              htmlFor="item"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Item Name
+            </label>
+            <input
+              type="text"
+              name="item"
+              id="item"
+              value={newRfqData.item}
+              onChange={handleFormChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2" // <-- Added py-2
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="amount_required_lbs"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Amount Required (lbs)
+            </label>
+            <input
+              type="number"
+              name="amount_required_lbs"
+              id="amount_required_lbs"
+              value={newRfqData.amount_required_lbs ?? ""}
+              onChange={handleFormChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2" // <-- Added py-2
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="ship_to_location"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Ship To Location
+            </label>
+            <input
+              type="text"
+              name="ship_to_location"
+              id="ship_to_location"
+              value={newRfqData.ship_to_location}
+              onChange={handleFormChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2" // <-- Added py-2
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="due_date"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Due Date
+            </label>
+            <input
+              type="date"
+              name="due_date"
+              id="due_date"
+              value={newRfqData.due_date ?? ""}
+              onChange={handleFormChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2" // <-- Added py-2
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="required_certifications"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Required Certifications (comma-separated)
+            </label>
+            <input
+              type="text"
+              name="required_certifications"
+              id="required_certifications"
+              value={certInput}
+              onChange={(e) => setCertInput(e.target.value)}
+              placeholder="Organic, Non-GMO"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2" // <-- Added py-2
+            />
+          </div>
+
+          {createError && (
+            <p className="text-sm text-red-500 bg-red-50 p-3 rounded-md">
+              Error: {createError.message}
+            </p>
+          )}
+
+          <div className="flex justify-end gap-3 pt-2">
+            <button
+              onClick={handleCloseModal}
+              className="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-gray-300 transition-colors"
+              disabled={isCreating}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
+              disabled={isCreating || !newRfqData.item}
+            >
+              {isCreating ? "Creating..." : "Create RFQ"}
+            </button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+}
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/modules/RFQView.tsx ===
+
+=== START FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/assets/react.svg ===
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="35.93" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 228"><path fill="#00D8FF" d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"></path></svg>
+=== END FILE: /Users/duncan/dev/personal-projects/waystation/frontend/src/assets/react.svg ===
+
+=== PROJECT FILE TREE ===
+.
+├── code_context.py
+├── eslint.config.js
+├── frontend_code_context.txt
+├── index.html
+├── package.json
+├── postcss.config.js
+├── README.md
+├── src
+│   ├── api
+│   │   ├── quote-api.ts
+│   │   ├── rfq-api.ts
+│   │   └── supplier-api.ts
+│   ├── App.css
+│   ├── App.tsx
+│   ├── assets
+│   │   └── react.svg
+│   ├── components
+│   │   └── Modal.tsx
+│   ├── config.ts
+│   ├── hooks
+│   │   ├── useCreateRFQ.ts
+│   │   ├── useGenerateClarificationEmail.ts
+│   │   ├── useGetQuotes.ts
+│   │   ├── useGetQuotesForRfq.ts
+│   │   ├── useGetRFQs.ts
+│   │   ├── useGetSuppliers.ts
+│   │   └── useProcessEmail.ts
+│   ├── index.css
+│   ├── main.tsx
+│   ├── modules
+│   │   ├── QuoteComparisonView.tsx
+│   │   ├── QuotesView.tsx
+│   │   ├── RFQView.tsx
+│   │   └── SuppliersView.tsx
+│   ├── types
+│   │   ├── quote.ts
+│   │   ├── rfq.ts
+│   │   └── supplier.ts
+│   ├── utils
+│   │   └── api.ts
+│   └── vite-env.d.ts
+├── tailwind.config.js
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
+└── yarn.lock
+
+9 directories, 39 files
