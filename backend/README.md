@@ -16,10 +16,10 @@
     docker run --name waystation-db -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=waystation -p 5432:5432 -d postgres:16-alpine
     ```
 
-2.  **Install dependencies.** Use `uv` to install the required Python packages:
+2.  **Install dependencies.** Use `uv` to install the required Python packages from the project's `pyproject.toml` and `uv.lock` files:
 
     ```bash
-    uv pip install -r requirements.txt
+    uv sync
     ```
 
 3.  **Run database migrations.**

@@ -22,3 +22,6 @@
     ```
 
     The frontend will be available at `http://localhost:3000`.
+
+(Make sure backend is spun up too. Look at backend/README.md for start up instructions)
+
